@@ -42,12 +42,7 @@
             ></v-col>
           </v-card-title> -->
       <v-card class="mx-auto mt-5 justify-center classtable">
-        <v-data-table
-          :headers="headers"
-          :items="itemtable"
-          items-per-page="100"
-          outlined
-        >
+        <v-data-table :headers="headers" :items="itemtable" outlined>
           <template #[`item.vpn`]="{ item }">
             <v-chip color="red" small outlined v-if="item.vpn == true">
               <v-icon class="mr-2" color="success" small

@@ -89,6 +89,10 @@
               </template>
 
               <template #[`item.TransactionDate`]="{ item }">
+      
+      
+      
+      
                 {{ item.TransactionDate.toString().slice(0, 10) }} <br />
                 {{ item.TransactionDate.toString().slice(11, 19) }}
               </template>
@@ -108,13 +112,13 @@
 
     <div>
       <v-dialog persistent v-model="dialog" width="500">
-        <v-card>
-          <v-card-title class="text-h5 grey lighten-2">
+        <v-card class="pa-3">
+          <v-card-title class="justify-center grey lighten-2">
             เติมเครดิต
           </v-card-title>
           ลายละเอียด : {{ transaction_detail }} ref: {{ pin_ref }}
-          <v-divider></v-divider>
-          pin:
+          <v-divider class="my-2"></v-divider>
+          pin
           <v-text-field
             outlined
             dense
@@ -124,7 +128,7 @@
             type="number"
           ></v-text-field>
           <v-card-actions>
-            <v-btn color="primary" text @click="cancleTopup"> ยกเลิก </v-btn>
+            <v-btn color="error" text @click="cancleTopup"> ยกเลิก </v-btn>
             <v-spacer></v-spacer>
             <v-btn color="primary" text @click="validate_pin(pin)">
               ยืนยัน

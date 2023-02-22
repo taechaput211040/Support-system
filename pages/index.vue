@@ -3,9 +3,9 @@
     <div v-if="!isLoading">
       <v-row>
         <v-container>
-          <h3 class="text-center mt-2">ประวัติการโยกเงิน</h3>
+          <h3 class="text-center m-2">ประวัติการโยกเงิน</h3>
 
-          <v-row class="select-item p-0 align-center">
+          <v-row class="select-item p-0 align-center mt-4">
             <h4 class="px-4">กรอก Username :</h4>
 
             <v-col cols="8" md="2">

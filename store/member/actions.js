@@ -45,7 +45,7 @@ export async function changeStatus(context, payload) {
         {
           id: payload.id,
           status: payload.status,
-          operator :  context.rootState.auth.user
+          operator: context.rootState.auth.user
         }
       );
       resolve(data);
@@ -99,252 +99,80 @@ export async function getReportmemberbyid({ commit }, fillter = {}) {
   });
 }
 export function providerMap(context, input) {
-  console.log(context)
-  console.log(input)
-  const string_data = context.rootState.auth.provider[input]
-  console.log(string_data)
-  return input
+  console.log(context);
+  console.log(input);
+  const string_data = context.rootState.auth.provider[input];
+  console.log(string_data);
+  return input;
 }
 // เชครีพอตเมมเบอร์ ID
 //เชคข้อมูลปัจจุบัน turn
-export async function getTurnByid( context, username ) {
-  console.log(username)
+export async function getTurnByid(context, username) {
+  console.log(username);
   return new Promise(async (resolve, reject) => {
-//get turn
-try {
-  let result = await this.$axios.get(
-    `${process.env.ALL_MEMBER}/api/MemberTurn/Auto/${username}`,
-  
-  );
-  resolve(result);
-} catch (error) {
-  reject(error);
-}
-//get credit
+    //get turn
+    try {
+      let result = await this.$axios.get(
+        `${process.env.ALL_MEMBER}/api/MemberTurn/Auto/${username}`
+      );
+      resolve(result);
+    } catch (error) {
+      reject(error);
+    }
+    //get credit
 
-//get winlose
-  
+    //get winlose
   });
-} 
-export async function updateTurn( context, turn ) {
+}
+export async function updateTurn(context, turn) {
   // console.log(turn)
   // return
-  turn.operator = context.rootState.auth.user
-  turn.ip_operator = context.rootState.auth.ip
-  
-  return new Promise(async (resolve, reject) => {
-//get turn
-try {
-  let result = await this.$axios.put(
-    `${process.env.ALL_MEMBER}/api/MemberTurn`,turn
-  
-  );
-  resolve(result);
-} catch (error) {
-  reject(error);
-}
-//get credit
+  turn.operator = context.rootState.auth.user;
+  turn.ip_operator = context.rootState.auth.ip;
 
-//get winlose
-  
+  return new Promise(async (resolve, reject) => {
+    //get turn
+    try {
+      let result = await this.$axios.put(
+        `${process.env.ALL_MEMBER}/api/MemberTurn`,
+        turn
+      );
+      resolve(result);
+    } catch (error) {
+      reject(error);
+    }
+    //get credit
+
+    //get winlose
   });
-} 
-export async function getDetailLink( context, url ) {
-
-  // return
-  
-  
-  return new Promise(async (resolve, reject) => {
-//get turn
-
-try {
- 
-    let result = await this.$axios.post(
-      `${process.env.ALL_SUPPORT}/api/Website/Betdetail`,{url:url}
-    
-    );
-  
-
-  resolve(result);
-} catch (error) {
-  console.log(error)
-  reject(error);
 }
-//get credit
+export async function getDetailLink(context, url) {
+  // return
 
-//get winlose
-  
+  return new Promise(async (resolve, reject) => {
+    //get turn
+
+    try {
+      let result = await this.$axios.post(
+        `${process.env.ALL_SUPPORT}/api/Website/Betdetail`,
+        { url: url }
+      );
+
+      resolve(result);
+    } catch (error) {
+      console.log(error);
+      reject(error);
+    }
+    //get credit
+
+    //get winlose
   });
 }
 //เชคข้อมูลปัจจุบัน turn
-//เชคข้อมูลปัจจุบัน transection
-export async function getTransactionid({ commit, username }) {
-  return new Promise(async (resolve, reject) => {
-    try {
-      const response = {
-        data: {
-          dp: {
-            afcredit: "1",
-            amount: "0",
-            bfcredit: "0",
-            bonusamount: "1",
-            companyBank: "checkin",
-            created_at: "2022-01-20T23:53:46.000000Z",
-            dp_count: 0,
-            dpref: "58579427-a2b0-41e5-9501-b9350f7804ba",
-            id: 595,
-            member_id: 321,
-            remark: "เติม 0 บาท โบนัส 1บาท  สำเร็จ โดยRICO หมายเหตุ : Checkin ",
-            smsdatetime: "-",
-            topupby: "RICO",
-            updated_at: "2022-01-20T23:53:46.000000Z",
-            ip: "103.83.188.31",
-            provider_active: "JL"
-          },
-          stats: [
-            {
-              bet: 1842.1,
-              commission: 0,
-              currencyname: "TH",
-              grouped: "JL",
-              p_share: 0,
-              p_win: 0,
-              payout: 1617.87,
-              turnover: 1842.1,
-              wagers: 0,
-              winlose: 224.23
-            },
-            {
-              bet: 0,
-              commission: 0,
-              currencyname: "TH",
-              grouped: "UF",
-              p_share: 0,
-              p_win: 0,
-              payout: 0,
-              turnover: 0,
-              wagers: 0,
-              winlose: 0
-            }
-          ]
-        }
-      };
-      // let response = await api.get(`/api/progress/${fillter.username}`, {
-      //   params: {
-      //     username
-      //   }
-      // });
-      resolve(response);
-    } catch (error) {
-      reject(error);
-    }
-  });
-}
-//เชคข้อมูลปัจจุบัน transection
-//เเก้ไขเครดิต/รายการผิดพลาด
-export async function getManualEditCredit(context, params) {
-
-  //   try {
-  //     const response = {
-  //       data: {
-  //         data: [
-  //           {
-  //             afcredit: 0,
-  //             bfcredit: 0,
-  //             bonus: 0,
-  //             created_at: "2022-01-24T14:41:51.000000Z",
-  //             credit: 75,
-  //             id: 903,
-  //             operator: "nan mon",
-  //             remark:
-  //               "เติมเงินให้ BE9794691646 จำนวน 75 บาท ,รายการไม่เข้าระบบ,เติมตามเงื่อนไขโปรโมชั่น โปรดเช็ครายการฝาก,เติมโดย nan mon หมายเหตุเพิ่มเติม t",
-  //             topupcredit: 0,
-  //             type: "SYSTEMNODATA",
-  //             username: "BE9794691646"
-  //           },
-  //           {
-  //             afcredit: 0,
-  //             bfcredit: 0,
-  //             bonus: 0,
-  //             created_at: "2022-01-24T14:41:51.000000Z",
-  //             credit: 75,
-  //             id: 904,
-  //             operator: "nan mon",
-  //             remark:
-  //               "เติมเงินให้ BE9794691646 จำนวน 75 บาท ,รายการไม่เข้าระบบ,เติมตามเงื่อนไขโปรโมชั่น โปรดเช็ครายการฝาก,เติมโดย nan mon หมายเหตุเพิ่มเติม t",
-  //             topupcredit: 0,
-  //             type: "SYSTEMNODATA",
-  //             username: "BE9794691646"
-  //           }
-  //         ],
-  //         total_bonus: 0,
-  //         total_cutcredit: 100,
-  //         total_nodata: 2121
-  //       }
-  //     };
-  //     // let response = await api.get(`/api/getManualEditCredit`, {
-  //     //   params: {
-  //     //     ..fillter
-  //     //   }
-  //     // });
-  //     resolve(response);
-  //   } catch (error) {
-  //     reject(error);
-  //   }
-  // });
-  return new Promise(async (resolve, reject) => {
-    try {
-      let response = await this.$axios.get(
-        `${process.env.ALL_EDITCREDIT}/api/Edit/${context.rootState.auth.company}/${context.rootState.auth.agent}`,
-        { params }
-      );
-      console.log(response.data);
-      resolve(response);
-    } catch (error) {
-      reject(error);
-    }
-  });
-}
-//เเก้ไขเครดิต/รายการผิดพลาด
-
-export function getTransactionMember(context, params) {
-  // console.log(context.state)
-  // return
-
-  return new Promise(async (resolve, reject) => {
-    try {
-      let response = await this.$axios.get(
-        `${process.env.REAL_TIME_REPORT_URL_SEAMLESS}/memberProvider`,
-        { params }
-      );
-      console.log(response.data);
-      resolve(response);
-    } catch (error) {
-      reject(error);
-    }
-  });
-}
-export function get5DepositRecord(context, username) {
-  // console.log(context.state)
-  // return
-
-  return new Promise(async (resolve, reject) => {
-    try {
-      let response = await this.$axios.get(
-        `${process.env.ALL_SUPPORT}/api/Website/Deposit5/${username}`
-        
-      );
-      console.log(response.data);
-      resolve(response);
-    } catch (error) {
-      reject(error);
-    }
-  });
-}
 
 export function createMember(context, body) {
   return new Promise(async (resolve, reject) => {
-    // console.log(context.rootState.auth.hash)
+    console.log(process.env.ALL_MEMBER);
     try {
       let response = await this.$axios.post(
         `${process.env.ALL_MEMBER}/api/Member/Auto/${context.rootState.auth.hash}`,
@@ -392,7 +220,7 @@ export function getMemberWithdraw(context, username) {
 export function editMember(context, body) {
   return new Promise(async (resolve, reject) => {
     // console.log(context.rootState.auth.user)
-    body.operator = context.rootState.auth.user
+    body.operator = context.rootState.auth.user;
     try {
       let response = await this.$axios.put(
         `${process.env.ALL_MEMBER}/api/Member/`,
@@ -407,13 +235,12 @@ export function editMember(context, body) {
 }
 export function PostEditTopupCredit(context, body) {
   return new Promise(async (resolve, reject) => {
-
     // console.log(context.rootState.auth.user)
-    body.operator = context.rootState.auth.user
-    body.ip_operator = context.rootState.auth.ip
-    body.company = context.rootState.auth.company
-    body.agent = context.rootState.auth.agent
-    console.log(body)
+    body.operator = context.rootState.auth.user;
+    body.ip_operator = context.rootState.auth.ip;
+    body.company = context.rootState.auth.company;
+    body.agent = context.rootState.auth.agent;
+    console.log(body);
     try {
       let response = await this.$axios.post(
         `${process.env.ALL_SUPPORT}/api/Website/Edit/Credit`,
@@ -429,10 +256,10 @@ export function PostEditTopupCredit(context, body) {
 export function PostEditCutCredit(context, body) {
   return new Promise(async (resolve, reject) => {
     // console.log(context.rootState.auth.user)
-    body.operator = context.rootState.auth.user
-    body.ip_operator = context.rootState.auth.ip
-    body.company = context.rootState.auth.company
-    body.agent = context.rootState.auth.agent
+    body.operator = context.rootState.auth.user;
+    body.ip_operator = context.rootState.auth.ip;
+    body.company = context.rootState.auth.company;
+    body.agent = context.rootState.auth.agent;
     try {
       let response = await this.$axios.post(
         `${process.env.ALL_SUPPORT}/api/Website/Edit/Cut`,
@@ -448,10 +275,10 @@ export function PostEditCutCredit(context, body) {
 export function PostEditTopupBonus(context, body) {
   return new Promise(async (resolve, reject) => {
     // console.log(context.rootState.auth.user)
-    body.operator = context.rootState.auth.user
-    body.ip_operator = context.rootState.auth.ip
-    body.company = context.rootState.auth.company
-    body.agent = context.rootState.auth.agent
+    body.operator = context.rootState.auth.user;
+    body.ip_operator = context.rootState.auth.ip;
+    body.company = context.rootState.auth.company;
+    body.agent = context.rootState.auth.agent;
     try {
       let response = await this.$axios.post(
         `${process.env.ALL_SUPPORT}/api/Website/Edit/Bonus`,
@@ -464,14 +291,13 @@ export function PostEditTopupBonus(context, body) {
     }
   });
 }
-export function getWheel(context){
+export function getWheel(context) {
   return new Promise(async (resolve, reject) => {
     // console.log(context.rootState.auth.user)
-  
+
     try {
       let response = await this.$axios.get(
         `${process.env.ALL_WHEEL}/api/Wheel/admin/${context.rootState.auth.company}/${context.rootState.auth.agent}`
-      
       );
 
       resolve(response.data);
@@ -479,12 +305,11 @@ export function getWheel(context){
       reject(error);
     }
   });
- 
 }
-export function updateWheel(context, turn){
+export function updateWheel(context, turn) {
   return new Promise(async (resolve, reject) => {
     // console.log(context.rootState.auth.user)
-   
+
     try {
       let response = await this.$axios.patch(
         `${process.env.ALL_WHEEL}/api/Wheel/admin/${turn.id}`,
@@ -496,9 +321,4 @@ export function updateWheel(context, turn){
       reject(error);
     }
   });
-
-
-
-    
-
 }

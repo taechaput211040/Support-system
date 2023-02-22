@@ -152,18 +152,7 @@
               required
             ></v-text-field
           ></v-col>
-          <v-col cols="12" sm="4" md="3"
-            ><span class="purple--text font-weight-bold font-italic"
-              >วันเกิด</span
-            >
-            <el-date-picker
-              class="full-width"
-              v-model="formRegister.birthdate"
-              type="date"
-              placeholder="วันที่"
-              style="width: 100%"
-            />
-          </v-col>
+
           <v-col cols="12" sm="4" md="3"
             ><span class="purple--text font-weight-bold font-italic">เพศ</span>
             <v-radio-group mandatory v-model="formRegister.gender">
@@ -200,9 +189,7 @@
       ></v-form>
 
       <v-card-actions class="justify-center mt-3">
-        <v-btn color="primary" @click="submitform"
-          >สมัครสมาชิกใหม่</v-btn
-        >
+        <v-btn color="primary" @click="submitform">สมัครสมาชิกใหม่</v-btn>
       </v-card-actions>
     </v-card>
   </v-flex>

@@ -418,7 +418,7 @@ export function getProviderEntance(context, { opcode }) {
   return new Promise(async (resolve, reject) => {
     try {
       let response = await this.$axios.get(
-        `http://127.0.0.1:5010/api/Website/ProviderBO?opcode=${opcode}`
+        `https://all-support-api-ehhif4jpyq-as.a.run.app/api/Website/ProviderBO?opcode=${opcode}`
       );
       console.log(response.data);
       resolve(response);
@@ -437,7 +437,7 @@ export function repairTransaction(
   return new Promise(async (resolve, reject) => {
     try {
       let response = await this.$axios.post(
-        `http://127.0.0.1:5010/api/Smart/Repair?username=${username}&active=${active_provider}`,
+        `https://all-support-api-ehhif4jpyq-as.a.run.app/api/Smart/Repair?username=${username}&active=${active_provider}`,
         repair
       );
       console.log(response.data);
@@ -455,7 +455,7 @@ export function setTurnRico(context, turn) {
   return new Promise(async (resolve, reject) => {
     try {
       let response = await this.$axios.post(
-        `http://127.0.0.1:5010/api/Website/Setturn`,
+        `https://all-support-api-ehhif4jpyq-as.a.run.app/api/Website/Setturn`,
         turn
       );
       console.log(response.data);

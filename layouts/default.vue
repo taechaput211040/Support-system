@@ -8,9 +8,7 @@
 
       <v-speed-dial direction="bottom" transition="slide-y-transition">
         <template v-slot:activator>
-          <v-btn v-model="fab" color="blue darken-2" dark fab>
-            <v-icon> mdi-account-circle </v-icon>
-          </v-btn>
+          <v-chip btn> <v-icon left> mdi-account-circle </v-icon>admin </v-chip>
         </template>
 
         <v-tooltip left color="red">
@@ -40,7 +38,7 @@
     >
       <v-toolbar-title class="font-weight-bold text-center pa-3" align-center>
         <h1>SUPPORT</h1>
-        <h2>SMARTBET</h2>
+        <h2 class="warning--text">SMARTBET</h2>
       </v-toolbar-title>
       <v-list nav dense>
         <div v-for="(link, i) in items" :key="i">
@@ -138,12 +136,11 @@ export default {
           status: true
         },
         {
-          title: "เติมเงินเข้า-ออก ค่ายเกม",
+          title: "เปิด-ปิด เว็ปไซต์",
           icon: "mdi-history",
-          to: "/topup",
+          to: "/webManagement",
           status: true
         },
-
         {
           title: "จัดการสมาชิก",
           icon: "mdi-account",
@@ -176,34 +173,15 @@ export default {
           ]
         },
         {
-          title: "รายงานฝาก/ถอน",
-          icon: "mdi-credit-card-check",
-          status: true,
-          subLinks: [
-            {
-              icon: "mdi-view-dashboard",
-              text: "รายการฝากสมาชิก",
-              to: "/reportTransaction/deposite",
-              status: true
-            },
-            {
-              icon: "mdi-view-dashboard",
-              text: "รายการถอนสมาชิก",
-              to: "/reportTransaction/withdraw",
-              status: true
-            }
-          ]
-        },
-        {
-          title: "ตั้งค่าโปรโมชั่น",
+          title: "ข้อมูลรายการฝากถอน",
           icon: "mdi-history",
-          to: "/promotion/generalPromotion",
+          to: "/checkMember",
           status: true
         },
         {
-          title: "โยกเงินเข้า-ออกในระบบ",
+          title: "เช็คข้อมูลโปรโมชั่น",
           icon: "mdi-history",
-          to: "/transfer",
+          to: "/promotion/generalPromotion",
           status: true
         },
         {
