@@ -41,5 +41,10 @@ export default {
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {}
+  build: {},
+  env: {
+    ALL_SUPPORT: process.env.ALL_SUPPORT,
+    ALL_MEMBER: process.env.ALL_MEMBER,
+    ALL_PROMOTION: process.env.ALL_PROMOTION,
+  }
 };

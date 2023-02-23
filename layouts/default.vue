@@ -142,6 +142,12 @@ export default {
           status: true
         },
         {
+          title: "เปิด-ปิด feature",
+          icon: "mdi-history",
+          to: "/systemfeature",
+          status: true
+        },
+        {
           title: "จัดการสมาชิก",
           icon: "mdi-account",
           status: true,

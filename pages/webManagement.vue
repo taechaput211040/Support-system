@@ -41,7 +41,7 @@ export default {
   },
   async created() {
     // await this.getProvider();
-    const res = await this.getAllWebsite();
+    const res = await this.$store.state.dispatch("auth/getAllWebsite");
 
     this.items = res.map(x => {
       return { value: x.website, text: x.website };
@@ -50,7 +50,6 @@ export default {
   methods: {
     ...mapActions("auth", {
       getProviderList: "getProviderList",
-
       getAllWebsite: "getAllWebsite",
       getMemberInfo: "getMemberInfo",
       getMemberDeposit: "getMemberDeposit",

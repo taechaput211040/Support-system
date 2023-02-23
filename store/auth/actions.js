@@ -12,7 +12,7 @@ export function login(context, { username, password }) {
       // resolve(mockResponse);
       // return;
       let response = await this.$axios.post(
-        "https://all-support-api-ehhif4jpyq-as.a.run.app/api/Login/auth",
+        `${process.env.ALL_SUPPORT}/api/Login/auth`,
         {
           username,
           password
@@ -65,7 +65,7 @@ export function credit_history(context, { username, limit }) {
       // resolve(mockResponse);
       // return;
       let response = await this.$axios.get(
-        `https://all-support-api-ehhif4jpyq-as.a.run.app/api/Smart/credithistory/${username}?limit=${limit}`
+        `${process.env.ALL_SUPPORT}/api/Smart/credithistory/${username}?limit=${limit}`
       );
 
       resolve(response);
@@ -89,7 +89,7 @@ export function deposit_smart(context, { username, credit }) {
       // resolve(mockResponse);
       // return;
       let response = await this.$axios.post(
-        `https://all-support-api-ehhif4jpyq-as.a.run.app/api/Smart/Deposit`,
+        `${process.env.ALL_SUPPORT}/api/Smart/Deposit`,
         { username: username, amount: credit }
       );
 
@@ -113,7 +113,7 @@ export function withdraw_smart(context, { username, credit }) {
       // resolve(mockResponse);
       // return;
       let response = await this.$axios.post(
-        `https://all-support-api-ehhif4jpyq-as.a.run.app/api/Smart/Withdraw`,
+        `${process.env.ALL_SUPPORT}/api/Smart/Withdraw`,
         { username: username, amount: credit }
       );
 
@@ -138,7 +138,7 @@ export function getProviderList(context) {
       // resolve(mockResponse);
       // return;
       let response = await this.$axios.get(
-        `https://all-support-api-ehhif4jpyq-as.a.run.app/api/Smart/Provider`
+        `${process.env.ALL_SUPPORT}/api/Smart/Provider`
       );
 
       resolve(response);
@@ -163,7 +163,7 @@ export function checkCredit(context, { username, provider_code }) {
       console.log(username);
       console.log(provider_code);
       let response = await this.$axios.post(
-        `https://all-support-api-ehhif4jpyq-as.a.run.app/api/Smart/Credit`,
+        `${process.env.ALL_SUPPORT}/api/Smart/Credit`,
         { username: username, provider_code: provider_code }
       );
 
@@ -189,7 +189,7 @@ export function topup_provider(context, { username, amount, provider_code }) {
 
       // return;
       let response = await this.$axios.post(
-        `https://all-support-api-ehhif4jpyq-as.a.run.app/api/Smart/Provider/DP`,
+        `${process.env.ALL_SUPPORT}/api/Smart/Provider/DP`,
         { username: username, amount: amount, provider_code: provider_code }
       );
 
@@ -217,7 +217,7 @@ export function withdraw_provider(
       // resolve(mockResponse);
       // return;
       let response = await this.$axios.post(
-        `https://all-support-api-ehhif4jpyq-as.a.run.app/api/Smart/Provider/WD`,
+        `${process.env.ALL_SUPPORT}/api/Smart/Provider/WD`,
         { username: username, amount: amount, provider_code: provider_code }
       );
 
@@ -240,7 +240,7 @@ export function generateRef(
         provider_code = "SMART";
       }
       let response = await this.$axios.post(
-        `https://all-support-api-ehhif4jpyq-as.a.run.app/api/Topup/`,
+        `${process.env.ALL_SUPPORT}/api/Topup/`,
         {
           username: username,
           amount: amount,
@@ -262,7 +262,7 @@ export function validatePin(context, { ref, pin }) {
   return new Promise(async (resolve, reject) => {
     try {
       let response = await this.$axios.post(
-        `https://all-support-api-ehhif4jpyq-as.a.run.app/api/Topup/Validate`,
+        `${process.env.ALL_SUPPORT}/api/Topup/Validate`,
         { ref: ref, pin: pin }
       );
 
@@ -280,7 +280,7 @@ export function getTransaction(context) {
   return new Promise(async (resolve, reject) => {
     try {
       let response = await this.$axios.get(
-        `https://all-support-api-ehhif4jpyq-as.a.run.app/api/Topup/Transaction`
+        `${process.env.ALL_SUPPORT}/api/Topup/Transaction`
       );
       console.log(response.data);
       resolve(response);
@@ -301,7 +301,7 @@ export function getAllWebsite(context) {
   return new Promise(async (resolve, reject) => {
     try {
       let response = await this.$axios.get(
-        `https://all-support-api-ehhif4jpyq-as.a.run.app/api/Website`
+        `${process.env.ALL_SUPPORT}/api/Website`
       );
       context.commit("set_website", response.data);
       localStorage.setItem("website", JSON.stringify(response.data));
@@ -319,7 +319,7 @@ export function getMemberTurn(context, { username, website }) {
   return new Promise(async (resolve, reject) => {
     try {
       let response = await this.$axios.get(
-        `https://all-support-api-ehhif4jpyq-as.a.run.app/api/Website/Rico/Turn?username=${username}&website=${website}`
+        `${process.env.ALL_SUPPORT}/api/Website/Rico/Turn?username=${username}&website=${website}`
       );
       console.log(response.data);
       resolve(response);
@@ -336,7 +336,7 @@ export function getMemberInfo(context, { username, website }) {
   return new Promise(async (resolve, reject) => {
     try {
       let response = await this.$axios.get(
-        `https://all-support-api-ehhif4jpyq-as.a.run.app/api/Website/Rico/Member?username=${username}&website=${website}`
+        `${process.env.ALL_SUPPORT}/api/Website/Rico/Member?username=${username}&website=${website}`
       );
       console.log(response.data);
       resolve(response);
@@ -352,7 +352,7 @@ export function getMemberDeposit(context, { username, website }) {
   return new Promise(async (resolve, reject) => {
     try {
       let response = await this.$axios.get(
-        `https://all-support-api-ehhif4jpyq-as.a.run.app/api/Website/Rico/Member/Deposit?username=${username}&website=${website}`
+        `${process.env.ALL_SUPPORT}/api/Website/Rico/Member/Deposit?username=${username}&website=${website}`
       );
       console.log(response.data);
       resolve(response);
@@ -369,7 +369,7 @@ export function getMemberDepositV2(context, username) {
   return new Promise(async (resolve, reject) => {
     try {
       let response = await this.$axios.get(
-        `https://all-support-api-ehhif4jpyq-as.a.run.app/api/Website/Rico/Member/DepositV2?username=${username}`
+        `${process.env.ALL_SUPPORT}/api/Website/Rico/Member/DepositV2?username=${username}`
       );
       console.log(response.data);
       resolve(response);
@@ -385,7 +385,7 @@ export function getMemberWithdrawV2(context, username) {
   return new Promise(async (resolve, reject) => {
     try {
       let response = await this.$axios.get(
-        `https://all-support-api-ehhif4jpyq-as.a.run.app/api/Website/Rico/Member/WithdrawV2?username=${username}`
+        `${process.env.ALL_SUPPORT}/api/Website/Rico/Member/WithdrawV2?username=${username}`
       );
       console.log(response.data);
       resolve(response);
@@ -401,7 +401,7 @@ export function getMemberWithdraw(context, { username, website }) {
   return new Promise(async (resolve, reject) => {
     try {
       let response = await this.$axios.get(
-        `https://all-support-api-ehhif4jpyq-as.a.run.app/api/Website/Rico/Member/Withdraw?username=${username}&website=${website}`
+        `${process.env.ALL_SUPPORT}/api/Website/Rico/Member/Withdraw?username=${username}&website=${website}`
       );
       console.log(response.data);
       resolve(response);
@@ -418,7 +418,7 @@ export function getProviderEntance(context, { opcode }) {
   return new Promise(async (resolve, reject) => {
     try {
       let response = await this.$axios.get(
-        `https://all-support-api-ehhif4jpyq-as.a.run.app/api/Website/ProviderBO?opcode=${opcode}`
+        `${process.env.ALL_SUPPORT}/api/Website/ProviderBO?opcode=${opcode}`
       );
       console.log(response.data);
       resolve(response);
@@ -437,7 +437,7 @@ export function repairTransaction(
   return new Promise(async (resolve, reject) => {
     try {
       let response = await this.$axios.post(
-        `https://all-support-api-ehhif4jpyq-as.a.run.app/api/Smart/Repair?username=${username}&active=${active_provider}`,
+        `${process.env.ALL_SUPPORT}/api/Smart/Repair?username=${username}&active=${active_provider}`,
         repair
       );
       console.log(response.data);
@@ -455,7 +455,7 @@ export function setTurnRico(context, turn) {
   return new Promise(async (resolve, reject) => {
     try {
       let response = await this.$axios.post(
-        `https://all-support-api-ehhif4jpyq-as.a.run.app/api/Website/Setturn`,
+        `${process.env.ALL_SUPPORT}/api/Website/Setturn`,
         turn
       );
       console.log(response.data);
