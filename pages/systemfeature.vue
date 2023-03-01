@@ -5,54 +5,44 @@
         <h3 class="text-center mt-2">เปิด-ปิด ฟีเจอร์</h3>
         <hr class="mt-4 mb-4" />
 
-        <div class="container">
-          <v-row class="select-item p-0">
-            <v-col cols="4" md="3">
-              <h4>เลือกเว็ปไซต์ :</h4>
-            </v-col>
-            <v-col cols="8" md="2">
-              <v-select
-                label="เลือกเว็ปไซต์"
-                v-model="webshow"
-                :items="items"
-                outlined
-                dense
-              ></v-select>
-            </v-col>
-            <v-col>
-              <v-btn
-                color="green lighten-1"
-                class="col-12 col-md-1"
-                dark
-                depressed
-                @click="showtable = true"
-              >
-                ค้นหา
-              </v-btn></v-col
-            >
-          </v-row>
+        <div class="row">
+          <div class="col-12 pa-2 col-sm-6">
+            <v-autocomplete
+              auto-select-first
+              clearable
+              hide-details="auto"
+              solo
+              :items="items"
+              label="กรอก เว็บไซต์"
+              outlined
+              dense
+              v-model="selectweb"
+            ></v-autocomplete>
+          </div>
+          <div class="col-12 pa-2 col-sm-6">
+            <v-btn color="green lighten-1" dark depressed @click="search">
+              ค้นหา
+            </v-btn>
+          </div>
         </div>
-        <template v-if="showtable == true">
-          <v-container
-            ><v-card class="mx-auto mt-5 justify-center classtable">
-              <v-data-table
-                v-model="selected"
-                :headers="headers"
-                :items="itemtable"
-                item-key="name"
-                hide-default-footer
-                ><template #[`item.manage`]="{item}">
-                  <v-switch :input-value="item.manage" color="success" />
-                </template>
-              </v-data-table>
-              <div class="text-right pa-2">
-                <v-btn class="justify-center col-2" color="success"
-                  >บันทึก</v-btn
-                >
-              </div>
-            </v-card>
-          </v-container>
-        </template>
+
+        <v-container
+          ><v-card class="mx-auto mt-5 justify-center classtable">
+            <v-data-table
+              v-model="selected"
+              :headers="headers"
+              :items="itemtable"
+              item-key="name"
+              hide-default-footer
+              ><template #[`item.manage`]="{item}">
+                <v-switch :input-value="item.manage" color="success" />
+              </template>
+            </v-data-table>
+            <div class="text-right pa-2">
+              <v-btn class="justify-center col-2" color="success">บันทึก</v-btn>
+            </div>
+          </v-card>
+        </v-container>
       </v-container>
     </v-row></v-flex
   >
@@ -65,6 +55,7 @@ export default {
       webshow: "",
       items: [],
       showtable: false,
+      selectweb: "",
       selected: [],
       headers: [
         {
@@ -108,6 +99,14 @@ export default {
         }
       ]
     };
+  },
+  async created() {
+    // await this.getProvider();
+    const res = await this.$store.dispatch("auth/getAllWebsite");
+
+    this.items = res.map(x => {
+      return { value: x.website, text: x.website };
+    });
   },
   methods: {
     Toggle(Bool, index) {}

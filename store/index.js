@@ -6,7 +6,7 @@ import promotion from "./promotion";
 // we first import the module
 import VueSweetalert2 from "vue-sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
-
+import setting from "./setting";
 import moment from "moment";
 Vue.prototype.$moment = moment;
 Vue.use(VueSweetalert2);
@@ -112,7 +112,7 @@ export default function(/* { ssrContext } */) {
         }
       ]
     },
-    modules: { auth, promotion, member },
+    modules: { auth, promotion, member, setting },
 
     strict: process.env.DEV
   });

@@ -26,30 +26,6 @@ export function login(context, { username, password }) {
   });
 }
 
-export function logout(context) {
-  return new Promise(async (resolve, reject) => {
-    try {
-      let response = await api.post("/api/v1/authenticate/logout", data);
-      resolve(response);
-    } catch (error) {
-      reject(error);
-    }
-  });
-}
-
-export function changePassword(context, data) {
-  return new Promise(async (resolve, reject) => {
-    try {
-      let response = await api.post(
-        "/api/v1/authenticate/reset-password",
-        data
-      );
-      resolve(response);
-    } catch (error) {
-      reject(error);
-    }
-  });
-}
 
 export function credit_history(context, { username, limit }) {
   return new Promise(async (resolve, reject) => {

@@ -201,8 +201,6 @@ span {
   font-size: 12.5px;
 }
 
-
-
 // table thead > tr > th:nth-child(even),
 // table thead > tr > th:nth-child(even).active {
 //   background-color: #4c2e81 !important;
@@ -245,43 +243,7 @@ span {
 .el-input__inner {
   border: 1px solid #9d9d9d !important;
 }
-.v-expansion-panel-header {
-  padding: 0px 20px !important;
-}
-.v-expansion-panel-content__wrap {
-  padding: 0 5px 6px;
-  flex: 1 1 auto;
-  max-width: 100%;
-}
-.v-application .aligncclass {
-  justify-content: end !important;
-}
-.img_promotion {
-  width: 95%;
-  height: auto;
-  margin: auto;
-}
-.card_promotion {
-  .active_card {
-    background: linear-gradient(66deg, #3a742a, #6dc557);
-  }
-  .title_card {
-    border-radius: 10px 10px 0 0;
-    background-color: #4a4a4a;
-    padding: 10px;
-    color: rgb(255, 255, 255);
-    font-weight: bold;
-  }
-  background-color: #efefef;
-  border-radius: 15px;
-  .action_card {
-    background-color: #4a4a4a;
-    padding: 10px;
-  }
-}
-.v-expansion-panel-content__wrap {
-  padding: 0 10px 5px !important;
-}
+
 .col-6 {
   padding: 6px !important;
 }
@@ -451,93 +413,7 @@ table tbody tr:nth-child(odd) {
     transform: translate(1px, -2px) rotate(-1deg);
   }
 }
-.frist_color {
-  background-color: #3e3e3e;
-  color: white;
-  border-radius: 10px;
-}
-.frist_color {
-  .v-input--selection-controls .v-input__slot,
-  .v-input--selection-controls .v-radio {
-    justify-content: center;
-  }
-}
-.row + .row {
-  margin-top: 0px !important;
-}
 
-.mainshow {
-  min-height: 90vh;
-  box-shadow: 0px 4px 14px rgb(0 0 0 / 14%);
-  background: #ffffff;
-  border-radius: 30px;
-}
-.v-dialog {
-  margin: 10px !important;
-  padding: 0 !important;
-}
-.username {
-  background: url("https://image.smart-ai-api.com/public/Rico-main-resite/round-account-button-with-user-inside.png")
-    no-repeat left;
-  background-position: 8px 3px;
-  background-size: 32px;
-}
-.password {
-  background: url("https://image.smart-ai-api.com/public/Rico-main-resite/padlock.png")
-    no-repeat left;
-  background-position: 8px 3px;
-  background-size: 32px;
-}
-.agentkey {
-  background: url("https://image.smart-ai-api.com/public/Rico-main-resite/key.png")
-    no-repeat left;
-  background-position: 8px 3px;
-  background-size: 30px;
-}
-.header-login {
-  img {
-    width: 211px;
-    height: auto;
-    margin-bottom: 10px;
-  }
-  margin-bottom: 29px;
-  text-align: center !important;
-  h4 {
-    color: gray !important;
-  }
-}
-$greenSeaweed: rgba(2, 128, 144, 1);
-$blueQueen: rgba(69, 105, 144, 1);
-$redFire: rgba(244, 91, 105, 1);
-
-// Fonts
-
-@media only screen and (max-width: 600px) {
-  .login {
-    width: 90%;
-    transform: translate(0, 0);
-  }
-}
-@media only screen and (min-width: 600px) {
-  .login {
-    width: 95%;
-    transform: translate(0, 0);
-  }
-}
-@media only screen and (min-width: 1023px) {
-  .login {
-    width: 95%;
-    padding: 30px 140px 43px 140px !important;
-    transform: translate(0, 0);
-  }
-  .img-mockup {
-    display: inherit !important;
-    position: absolute;
-    left: -256px;
-    top: 0;
-    width: 400px;
-  }
-}
 .img-mockup {
   display: none;
 }
@@ -559,100 +435,12 @@ $redFire: rgba(244, 91, 105, 1);
   color: rgb(75, 75, 75);
   opacity: 1; /* Firefox */
 }
-.login {
-  input {
-    display: block;
-    width: 100%;
-    margin: 10px 0px;
-    height: 38px;
-    background-color: rgb(185 185 185 / 41%) !important;
-    border: none;
-    box-sizing: border-box;
-    border-radius: 49px;
-    padding-right: 10px;
-    color: rgb(0, 0, 0);
-    width: 100%;
-    font-size: 16px;
-    padding-left: 46px;
-    padding-right: 33px;
-    -webkit-transition: all 0.2s ease-in-out;
-    -o-transition: all 0.2s ease-in-out;
-    transition: all 0.2s ease-in-out;
-    &:focus-visible {
-      border: none;
-    }
-  }
-}
-
-@keyframes wawes {
-  from {
-    transform: rotate(0);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
 
 .feedback {
   position: absolute;
   margin-top: -25px;
 
   color: #ff4242;
-}
-@media (min-width: 767.98px) {
-  .bg-page {
-    background-image: url("https://image.smart-ai-api.com/public/Rico-main-resite/bgdy.jpg");
-    min-height: 100vh;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    overflow: hidden;
-  }
-}
-@media (max-width: 320.98px) {
-  .bg-page {
-    background-image: url("https://image.smart-ai-api.com/public/Rico-main-resite/bgmb.jpg");
-    min-height: 100vh;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    overflow: hidden;
-  }
-  .section_logo {
-    width: 100%;
-    text-align: center;
-    z-index: 15;
-    position: relative;
-    bottom: -6px;
-    text-align: center;
-  }
-  .login {
-    margin-top: 0px !important;
-    width: 95%;
-    padding: 30px 30px 30px 30px !important;
-  }
-}
-@media (max-width: 767.98px) and (min-width: 321px) {
-  .bg-page {
-    background-image: url("https://image.smart-ai-api.com/public/Rico-main-resite/bgmb.jpg");
-    min-height: 100vh;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    overflow: hidden;
-  }
-  .section_logo {
-    width: 100%;
-    text-align: center;
-    z-index: 15;
-    position: relative;
-    bottom: -15px;
-  }
-  .login {
-    margin-top: 30px;
-    transform: translate(0, 145px);
-    padding: 30px 30px 30px 30px !important;
-  }
 }
 button:hover {
   background-color: #ffffff;
@@ -726,118 +514,30 @@ button:hover {
 .text-input {
   color: wheat;
 }
-.card-show {
-  padding: 10px;
-  border-radius: 10px;
-  position: relative;
-  flex-direction: column;
-  min-width: 0;
-  word-wrap: break-word;
-  background-clip: border-box;
-  font-size: 18px;
-  box-shadow: 0px 5px 8px 0px rgb(179 176 176 / 75%);
-}
-.title_header {
-  text-align: center;
-  font-weight: bold;
-}
 
-.copy-link {
-  .copy_icon {
-    height: 25px;
-  }
-  cursor: pointer;
+.bgdark_login {
+  // box-shadow: 0px 0px 24px var(--modal_boxshadow);
+  box-shadow: 0px 0px 24px rgb(0, 0, 0);
+  // background: var(--login_section_bg_page);
+  border-radius: 25px;
+  // border: 3px solid #fff;
 }
-.card_config {
-  padding: 10px;
-  input,
-  select {
-    padding: 0;
-    margin: 0px 0px;
-    border: none;
-    text-align: center;
-    border-radius: 0;
-    width: 120px;
-  }
-  .form-control:focus {
-    color: #495057;
-    background-color: #fff;
-    /* border-color: #80bdff; */
-    text-align: center;
-    outline: 0;
-    box-shadow: 0 0 0 0.2rem rgb(255 255 255 / 25%);
-  }
-}
-.section_search {
-  .date-select {
-    font-weight: bold;
-    border-top-right-radius: 10px;
-    border-top-left-radius: 10px;
-    background: linear-gradient(
-      to bottom right,
-      #111111 0%,
-      #343a40 100%
-    ) !important;
-    padding: 15px;
-    color: white;
-  }
-}
-#edit-config___BV_modal_header_.modal-header {
-  background: linear-gradient(
-    to bottom right,
-    #111111 0%,
-    #002952 100%
-  ) !important;
-  color: rgb(255, 255, 255);
-}
-.input_form {
+.bg_login {
+  height: 95vh;
   display: flex;
-  align-items: baseline;
-  padding: 5px;
+  align-content: center;
+  justify-content: center;
 }
-.card_affiliate {
+.menuIndex {
+  margin: 3px;
+  text-align: center;
   border-radius: 10px;
-  box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%) !important;
-
-  .text_card {
-    font-weight: bold;
-    border-top-right-radius: 10px;
-    border-top-left-radius: 10px;
-    background: linear-gradient(
-      to bottom right,
-      #111111 0%,
-      #343a40 100%
-    ) !important;
-    padding: 15px;
-    color: white;
-  }
-  .text_card_child {
-    font-weight: bold;
-    border-top-right-radius: 10px;
-    border-top-left-radius: 10px;
-    background: linear-gradient(
-      to bottom right,
-      rgba(126, 186, 133, 0.81) 0%,
-      #0e5c20 100%
-    ) !important;
-    padding: 15px;
-    color: white;
-  }
-  .body_card {
-    .card-child {
-      border-radius: 10px;
-      background: white;
-      .text-end {
-        font-weight: bold;
-        font-size: large;
-      }
-    }
-  }
+  border: 1px solid salmon;
+  background: salmon;
+  font-weight: bold;
+  color: white;
 }
-.frist_color {
-  font-size: 0.7vw;
-}
-.switch-center {
-  display: flex !important;
-  justify-content: center !important;
+.mainshow {
+  min-height: 100vh;
+  max-width: 100%;
 }

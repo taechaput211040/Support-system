@@ -20,7 +20,7 @@
               v-on="on"
               small
               color="red"
-              @click="logoutAuto()"
+              @click="logout()"
             >
               <v-icon>mdi-logout</v-icon>
             </v-btn>
@@ -219,7 +219,7 @@ export default {
   computed: {},
   methods: {
     logout() {
-      this.$router.push("/logout");
+      this.$router.push("/login");
     }
   }
 };
