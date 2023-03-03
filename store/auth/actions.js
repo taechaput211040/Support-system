@@ -1,16 +1,6 @@
 export function login(context, { username, password }) {
   return new Promise(async (resolve, reject) => {
     try {
-      // const mockResponse = {
-      //   data: {
-      //     success: true,
-      //     key: "12345644566455",
-      //     username: username
-      //   }
-      // };
-      // context.commit("set_login", mockResponse.data);
-      // resolve(mockResponse);
-      // return;
       let response = await this.$axios.post(
         `${process.env.ALL_SUPPORT}/api/Login/auth`,
         {
@@ -26,20 +16,9 @@ export function login(context, { username, password }) {
   });
 }
 
-
 export function credit_history(context, { username, limit }) {
   return new Promise(async (resolve, reject) => {
     try {
-      // const mockResponse = {
-      //   data: {
-      //     success: true,
-      //     key: "12345644566455",
-      //     username: username
-      //   }
-      // };
-      // context.commit("set_login", mockResponse.data);
-      // resolve(mockResponse);
-      // return;
       let response = await this.$axios.get(
         `${process.env.ALL_SUPPORT}/api/Smart/credithistory/${username}?limit=${limit}`
       );
@@ -54,16 +33,6 @@ export function credit_history(context, { username, limit }) {
 export function deposit_smart(context, { username, credit }) {
   return new Promise(async (resolve, reject) => {
     try {
-      // const mockResponse = {
-      //   data: {
-      //     success: true,
-      //     key: "12345644566455",
-      //     username: username
-      //   }
-      // };
-      // context.commit("set_login", mockResponse.data);
-      // resolve(mockResponse);
-      // return;
       let response = await this.$axios.post(
         `${process.env.ALL_SUPPORT}/api/Smart/Deposit`,
         { username: username, amount: credit }
@@ -78,16 +47,6 @@ export function deposit_smart(context, { username, credit }) {
 export function withdraw_smart(context, { username, credit }) {
   return new Promise(async (resolve, reject) => {
     try {
-      // const mockResponse = {
-      //   data: {
-      //     success: true,
-      //     key: "12345644566455",
-      //     username: username
-      //   }
-      // };
-      // context.commit("set_login", mockResponse.data);
-      // resolve(mockResponse);
-      // return;
       let response = await this.$axios.post(
         `${process.env.ALL_SUPPORT}/api/Smart/Withdraw`,
         { username: username, amount: credit }
@@ -103,16 +62,6 @@ export function withdraw_smart(context, { username, credit }) {
 export function getProviderList(context) {
   return new Promise(async (resolve, reject) => {
     try {
-      // const mockResponse = {
-      //   data: {
-      //     success: true,
-      //     key: "12345644566455",
-      //     username: username
-      //   }
-      // };
-      // context.commit("set_login", mockResponse.data);
-      // resolve(mockResponse);
-      // return;
       let response = await this.$axios.get(
         `${process.env.ALL_SUPPORT}/api/Smart/Provider`
       );
@@ -126,16 +75,6 @@ export function getProviderList(context) {
 export function checkCredit(context, { username, provider_code }) {
   return new Promise(async (resolve, reject) => {
     try {
-      // const mockResponse = {
-      //   data: {
-      //     success: true,
-      //     key: "12345644566455",
-      //     username: username
-      //   }
-      // };
-      // context.commit("set_login", mockResponse.data);
-      // resolve(mockResponse);
-      // return;
       console.log(username);
       console.log(provider_code);
       let response = await this.$axios.post(
@@ -153,17 +92,6 @@ export function checkCredit(context, { username, provider_code }) {
 export function topup_provider(context, { username, amount, provider_code }) {
   return new Promise(async (resolve, reject) => {
     try {
-      // const mockResponse = {
-      //   data: {
-      //     success: true,
-      //     key: "12345644566455",
-      //     username: username
-      //   }
-      // };
-      // context.commit("set_login", mockResponse.data);
-      // resolve(mockResponse);
-
-      // return;
       let response = await this.$axios.post(
         `${process.env.ALL_SUPPORT}/api/Smart/Provider/DP`,
         { username: username, amount: amount, provider_code: provider_code }
@@ -182,16 +110,6 @@ export function withdraw_provider(
 ) {
   return new Promise(async (resolve, reject) => {
     try {
-      // const mockResponse = {
-      //   data: {
-      //     success: true,
-      //     key: "12345644566455",
-      //     username: username
-      //   }
-      // };
-      // context.commit("set_login", mockResponse.data);
-      // resolve(mockResponse);
-      // return;
       let response = await this.$axios.post(
         `${process.env.ALL_SUPPORT}/api/Smart/Provider/WD`,
         { username: username, amount: amount, provider_code: provider_code }
@@ -208,8 +126,6 @@ export function generateRef(
   context,
   { username, amount, provider_code, method }
 ) {
-  // console.log(context.state)
-  // return
   return new Promise(async (resolve, reject) => {
     try {
       if (!provider_code) {

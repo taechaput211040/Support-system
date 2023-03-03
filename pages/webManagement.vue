@@ -81,7 +81,9 @@ export default {
       headers: [
         {
           text: "ลำดับ",
-          value: "no"
+          value: "no",
+          sortable: false,
+          align: "center"
         },
         {
           text: "ชื่อเว็ป",
