@@ -57,7 +57,16 @@ export default {
     };
   },
   methods: {
-    async login() {}
+    async login() {
+      try {
+        // let res = await this.$store.dispatch("auth/login", this.formLogin);
+        // if (res.key) {
+          this.$router.push("/");
+        // }
+      } catch (error) {
+        console.log(error);
+      }
+    }
   }
 };
 </script>

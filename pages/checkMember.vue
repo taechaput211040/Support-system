@@ -2,7 +2,7 @@
   <v-flex
     ><v-row>
       <v-container>
-        <h3 class="text-center mt-2 mb-4">เช็คข้อมูลสมาชิกทุกเว็ป</h3>
+        <h3 class="text-center mt-2 mb-4">เช็คข้อมูลรายการฝากถอน</h3>
 
         <div class="col-12 pa-0 col-sm-6">
           <v-autocomplete

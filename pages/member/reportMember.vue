@@ -203,10 +203,10 @@
             </template> -->
 
             <template #[`item.created_at`]="{ item }">{{
-              created_at | dateFormat
+              item.created_at | dateFormat
             }}</template>
             <template #[`item.smsdatetime`]="{ item }">{{
-              smsdatetime | dateFormat
+              item.smsdatetime | dateFormat
             }}</template>
             <template #[`item.companyBank`]="{ item }"
               ><img-bank :value="item.companyBank"></img-bank
@@ -447,6 +447,7 @@ export default {
   components: { LoadingPage },
   data() {
     return {
+      radioGroup: "",
       options: {},
       isLoading: false,
       updateForm: {},
@@ -602,14 +603,14 @@ export default {
     ...mapActions("promotion", ["getPromotion"]),
     ...mapActions("member", [
       "getReportmember",
-      "getReportmemberbyid",
+
       "getMemberDeposit",
       "getMemberWithdraw",
       "changePasswordMember",
       "changeStatus",
       "editMember"
     ]),
-
+    search() {},
     async editmemberByOperator() {
       console.log(this.updateForm);
       try {

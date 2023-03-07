@@ -2,7 +2,7 @@ export function getWebList(context, params) {
   return new Promise(async (resolve, reject) => {
     try {
       let { data } = await this.$axios.get(
-        "https://all-support-api-v2-ehhif4jpyq-as.a.run.app/support/site/list",
+        `${process.env.ALL_SUPPORT_V2}/support/site/list`,
         {
           params: { ...params }
         }
@@ -17,7 +17,7 @@ export function changeSystem(context, payload) {
   return new Promise(async (resolve, reject) => {
     try {
       let { data } = await this.$axios.post(
-        `https://all-support-api-v2-ehhif4jpyq-as.a.run.app/support/site/${payload.site_id}/status/system`,
+        `${process.env.ALL_SUPPORT_V2}/support/site/${payload.site_id}/status/system`,
         {
           status: payload.status
         }
@@ -32,7 +32,7 @@ export function changeWithdraw(context, payload) {
   return new Promise(async (resolve, reject) => {
     try {
       let { data } = await this.$axios.post(
-        `https://all-support-api-v2-ehhif4jpyq-as.a.run.app/support/site/${payload.site_id}/status/withdraw`,
+        `${process.env.ALL_SUPPORT_V2}/support/site/${payload.site_id}/status/withdraw`,
         {
           status: payload.status
         }
@@ -47,7 +47,7 @@ export function lockdownWebsite(context, payload) {
   return new Promise(async (resolve, reject) => {
     try {
       let { data } = await this.$axios.post(
-        `https://all-support-api-v2-ehhif4jpyq-as.a.run.app/support/site/${payload.site_id}/status/lockdown`,
+        `${process.env.ALL_SUPPORT_V2}/support/site/${payload.site_id}/status/lockdown`,
         {
           status: true,
           operator: "api"

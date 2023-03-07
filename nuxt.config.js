@@ -46,5 +46,8 @@ export default {
     ALL_SUPPORT: process.env.ALL_SUPPORT,
     ALL_MEMBER: process.env.ALL_MEMBER,
     ALL_PROMOTION: process.env.ALL_PROMOTION,
+    ALL_DEPOSIT: process.env.ALL_DEPOSIT,
+    ALL_WITHDRAW: process.env.ALL_WITHDRAW,
+    ALL_WITHDRAW: process.env.ALL_SUPPORT_V2
   }
 };

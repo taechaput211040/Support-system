@@ -121,12 +121,12 @@ export default {
       this.itemtable = g.data;
     },
     async getProvider() {
-      const provider = await this.getProviderList();
-      this.itemgamecompany = provider.data.map(x => {
-        return { value: x.code, text: x.name };
-      });
+      // const provider = await this.getProviderList();
+      // this.itemgamecompany = provider.data.map(x => {
+      //   return { value: x.code, text: x.name };
+      // });
 
-      console.log(this.itemgamecompany);
+      // console.log(this.itemgamecompany);
     }
   }
 };

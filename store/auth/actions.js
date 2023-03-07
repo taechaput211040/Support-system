@@ -1,13 +1,20 @@
 export function login(context, { username, password }) {
   return new Promise(async (resolve, reject) => {
     try {
-      let response = await this.$axios.post(
-        `${process.env.ALL_SUPPORT}/api/Login/auth`,
-        {
-          username,
-          password
+      let response = {
+        data: {
+          user: username,
+          key: 1234
         }
-      );
+      };
+
+      // let response = await this.$axios.post(
+      //   `${process.env.ALL_SUPPORT}/api/Login/auth`,
+      //   {
+      //     username,
+      //     password
+      //   }
+      // );
       context.commit("set_login", response.data);
       resolve(response);
     } catch (error) {
@@ -244,7 +251,7 @@ export function getMemberDeposit(context, { username, website }) {
   return new Promise(async (resolve, reject) => {
     try {
       let response = await this.$axios.get(
-        `${process.env.ALL_SUPPORT}/api/Website/Rico/Member/Deposit?username=${username}&website=${website}`
+        `${process.env.ALL_DEPOSIT}/api/Deposit/List/${username}`
       );
       console.log(response.data);
       resolve(response);
@@ -255,13 +262,10 @@ export function getMemberDeposit(context, { username, website }) {
 }
 
 export function getMemberDepositV2(context, username) {
-  // console.log(context.state)
-  // return
-
   return new Promise(async (resolve, reject) => {
     try {
       let response = await this.$axios.get(
-        `${process.env.ALL_SUPPORT}/api/Website/Rico/Member/DepositV2?username=${username}`
+        `${process.env.ALL_DEPOSIT}/api/Deposit/List/${username}`
       );
       console.log(response.data);
       resolve(response);
@@ -277,7 +281,7 @@ export function getMemberWithdrawV2(context, username) {
   return new Promise(async (resolve, reject) => {
     try {
       let response = await this.$axios.get(
-        `${process.env.ALL_SUPPORT}/api/Website/Rico/Member/WithdrawV2?username=${username}`
+        `${process.env.ALL_WITHDRAW}/api/Withdraw/Auto/Withdraw/Support/${username}`
       );
       console.log(response.data);
       resolve(response);
@@ -293,7 +297,7 @@ export function getMemberWithdraw(context, { username, website }) {
   return new Promise(async (resolve, reject) => {
     try {
       let response = await this.$axios.get(
-        `${process.env.ALL_SUPPORT}/api/Website/Rico/Member/Withdraw?username=${username}&website=${website}`
+        `${process.env.ALL_WITHDRAW}/api/Withdraw/Auto/Withdraw/Support/${username}`
       );
       console.log(response.data);
       resolve(response);

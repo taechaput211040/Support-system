@@ -109,7 +109,8 @@ export default {
     });
   },
   methods: {
-    Toggle(Bool, index) {}
+    Toggle(Bool, index) {},
+    search() {}
   }
 };
 </script>
