@@ -37,7 +37,6 @@ export function credit_history(context, { username, limit }) {
   });
 }
 
-
 export function getProviderList(context) {
   return new Promise(async (resolve, reject) => {
     try {
@@ -51,8 +50,6 @@ export function getProviderList(context) {
     }
   });
 }
-
-
 
 export function generateRef(
   context,
@@ -160,7 +157,7 @@ export function getMemberInfo(context, { username, website }) {
   return new Promise(async (resolve, reject) => {
     try {
       let response = await this.$axios.get(
-        `${process.env.ALL_SUPPORT}/api/Website/Rico/Member?username=${username}&website=${website}`
+        `${process.env.ALL_MEMBER}/api/Member/${username}`
       );
       console.log(response.data);
       resolve(response);
@@ -225,6 +222,22 @@ export function getMemberWithdraw(context, { username, website }) {
         `${process.env.ALL_WITHDRAW}/api/Withdraw/Auto/Withdraw/Support/${username}`
       );
       console.log(response.data);
+      resolve(response);
+    } catch (error) {
+      reject(error);
+    }
+  });
+}
+
+export function getCheckturn(context, { username }) {
+  // console.log(context.state)
+  // return
+
+  return new Promise(async (resolve, reject) => {
+    try {
+      let response = await this.$axios.get(
+        `${process.env.ALL_MEMBER}/api/MemberTurn/Auto/${username}`
+      );
       resolve(response);
     } catch (error) {
       reject(error);

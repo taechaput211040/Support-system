@@ -154,18 +154,6 @@ export default {
           subLinks: [
             {
               icon: "mdi-view-dashboard",
-              text: "สมัครสมาชิก",
-              to: "/member/register",
-              status: true
-            },
-            {
-              icon: "mdi-view-dashboard",
-              text: "รายงานสมาชิก",
-              to: "/member/reportMember",
-              status: true
-            },
-            {
-              icon: "mdi-view-dashboard",
               text: "เช็คข้อมูลปัจจุบัน/จำนวนเทิร์น",
               to: "/member/memberCheck",
               status: true
@@ -179,7 +167,13 @@ export default {
           ]
         },
         {
-          title: "ข้อมูลรายการฝากถอน",
+          title: "ข้อมูลเว็ปไซต์",
+          icon: "mdi-history",
+          to: "/webinfo",
+          status: true
+        },
+        {
+          title: "ข้อมูลสมาชิก",
           icon: "mdi-history",
           to: "/checkMember",
           status: true
@@ -191,15 +185,39 @@ export default {
           status: true
         },
         {
-          title: "ทางเข้าหลังบ้านค่ายเกม",
+          title: "จัดการ Landing Page",
           icon: "mdi-history",
-          to: "/showwebgame",
+          to: "/landingpage",
+          status: true
+        },
+        {
+          title: "จัดการ Member Page",
+          icon: "mdi-history",
+          to: "/memberpage",
           status: true
         },
         {
           title: "เปิด-ปิด ค่ายเกม",
           icon: "mdi-history",
           to: "/gamefeature",
+          status: true
+        },
+        {
+          title: "เชคเครดิตเอเย่น",
+          icon: "mdi-history",
+          to: "/checkCreditAgent",
+          status: true
+        },
+        {
+          title: "ลงทะเบียน SCB API",
+          icon: "mdi-history",
+          to: "/ScbManagement",
+          status: true
+        },
+        {
+          title: "สร้างข้อมูล Macrodroid",
+          icon: "mdi-history",
+          to: "/MacrodroidInfo",
           status: true
         }
       ]
