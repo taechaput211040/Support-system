@@ -1,8 +1,8 @@
 export default function() {
   return {
     key: localStorage.getItem("key") || "",
-    user:localStorage.getItem("username") || null,
-    website:localStorage.getItem("website") || null,
+    user: localStorage.getItem("username") || null,
+    website: JSON.parse(localStorage.getItem("website")) || null,
     gameType: {
       SL: "SLOT",
       LC: "LIVE-CASINO",
@@ -14,8 +14,8 @@ export default function() {
       FH: "FISHING",
       CB: "CARD & BOARD",
       MG: "MINI GAME"
-  },
-  provider: {
+    },
+    provider: {
       AB: "Allbet",
       AG: "ASIA GAMING",
       CQ: "CQ9",
@@ -46,6 +46,6 @@ export default function() {
       JK: "Joker",
       SA: "SA Gaming",
       RE: "Red Tiger"
-  },
+    }
   };
 }

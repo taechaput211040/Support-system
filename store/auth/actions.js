@@ -122,7 +122,7 @@ export function getAllWebsite(context) {
   return new Promise(async (resolve, reject) => {
     try {
       let response = await this.$axios.get(
-        `${process.env.ALL_SUPPORT}/api/Website`
+        `${process.env.ALL_SETTING}/api/Setting/AllActive`
       );
       context.commit("set_website", response.data);
       localStorage.setItem("website", JSON.stringify(response.data));

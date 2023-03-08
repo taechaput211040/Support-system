@@ -59,3 +59,15 @@ export function lockdownWebsite(context, payload) {
     }
   });
 }
+export function getSystemSetting(context, hash) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let { data } = await this.$axios.get(
+        `${process.env.ALL_SETTING}/api/Setting/${hash}`
+      );
+      resolve(data);
+    } catch (error) {
+      reject(error);
+    }
+  });
+}

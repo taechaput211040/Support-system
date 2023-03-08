@@ -106,7 +106,7 @@ export default {
     try {
       const res = await this.$store.dispatch("auth/getAllWebsite");
       this.items = res.map(x => {
-        return { value: x.website, text: x.website };
+        return { value: x.hash, text: x.auto_link, ...x };
       });
     } catch (error) {
       console.log(error);
