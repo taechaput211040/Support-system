@@ -37,34 +37,6 @@ export function credit_history(context, { username, limit }) {
   });
 }
 
-export function deposit_smart(context, { username, credit }) {
-  return new Promise(async (resolve, reject) => {
-    try {
-      let response = await this.$axios.post(
-        `${process.env.ALL_SUPPORT}/api/Smart/Deposit`,
-        { username: username, amount: credit }
-      );
-
-      resolve(response);
-    } catch (error) {
-      reject(error);
-    }
-  });
-}
-export function withdraw_smart(context, { username, credit }) {
-  return new Promise(async (resolve, reject) => {
-    try {
-      let response = await this.$axios.post(
-        `${process.env.ALL_SUPPORT}/api/Smart/Withdraw`,
-        { username: username, amount: credit }
-      );
-
-      resolve(response);
-    } catch (error) {
-      reject(error);
-    }
-  });
-}
 
 export function getProviderList(context) {
   return new Promise(async (resolve, reject) => {
@@ -79,55 +51,8 @@ export function getProviderList(context) {
     }
   });
 }
-export function checkCredit(context, { username, provider_code }) {
-  return new Promise(async (resolve, reject) => {
-    try {
-      console.log(username);
-      console.log(provider_code);
-      let response = await this.$axios.post(
-        `${process.env.ALL_SUPPORT}/api/Smart/Credit`,
-        { username: username, provider_code: provider_code }
-      );
 
-      resolve(response);
-    } catch (error) {
-      reject(error);
-    }
-  });
-}
 
-export function topup_provider(context, { username, amount, provider_code }) {
-  return new Promise(async (resolve, reject) => {
-    try {
-      let response = await this.$axios.post(
-        `${process.env.ALL_SUPPORT}/api/Smart/Provider/DP`,
-        { username: username, amount: amount, provider_code: provider_code }
-      );
-
-      resolve(response);
-    } catch (error) {
-      reject(error);
-    }
-  });
-}
-
-export function withdraw_provider(
-  context,
-  { username, amount, provider_code }
-) {
-  return new Promise(async (resolve, reject) => {
-    try {
-      let response = await this.$axios.post(
-        `${process.env.ALL_SUPPORT}/api/Smart/Provider/WD`,
-        { username: username, amount: amount, provider_code: provider_code }
-      );
-
-      resolve(response);
-    } catch (error) {
-      reject(error);
-    }
-  });
-}
 
 export function generateRef(
   context,
@@ -315,26 +240,6 @@ export function getProviderEntance(context, { opcode }) {
     try {
       let response = await this.$axios.get(
         `${process.env.ALL_SUPPORT}/api/Website/ProviderBO?opcode=${opcode}`
-      );
-      console.log(response.data);
-      resolve(response);
-    } catch (error) {
-      reject(error);
-    }
-  });
-}
-export function repairTransaction(
-  context,
-  { username, active_provider, repair }
-) {
-  // console.log(context.state)
-  // return
-
-  return new Promise(async (resolve, reject) => {
-    try {
-      let response = await this.$axios.post(
-        `${process.env.ALL_SUPPORT}/api/Smart/Repair?username=${username}&active=${active_provider}`,
-        repair
       );
       console.log(response.data);
       resolve(response);

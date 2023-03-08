@@ -192,8 +192,6 @@ export default {
   },
   methods: {
     ...mapActions("auth", [
-      "deposit_smart",
-      "withdraw_smart",
       "generateRef",
       "generateRef",
       "validatePin",

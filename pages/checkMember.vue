@@ -484,11 +484,16 @@ export default {
   },
   async created() {
     // await this.getProvider();
-    const res = await this.getAllWebsite();
+    try {
+       const res = await this.getAllWebsite();
 
     this.items = res.map(x => {
       return { value: x.website, text: x.website };
     });
+    } catch (error) {
+      console.log(error)
+    }
+   
   },
   methods: {
     ...mapActions("auth", {

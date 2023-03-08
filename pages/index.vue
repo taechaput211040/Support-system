@@ -206,7 +206,6 @@
   </v-flex>
 </template>
 <script>
-import * as moment from "moment";
 import { mapActions } from "vuex";
 export default {
   data() {
@@ -303,8 +302,6 @@ export default {
   methods: {
     ...mapActions("auth", {
       credit_history: "credit_history",
-      repairTransaction: "repairTransaction",
-      checkCredit: "checkCredit",
       getMember: "getMember",
       getMemberDepositV2: "getMemberDepositV2",
       getMemberWithdrawV2: "getMemberWithdrawV2"
@@ -322,37 +319,25 @@ export default {
       this.dlWithdraw = true;
     },
 
-    getthaidate(timethai) {
-      const time = moment(timethai)
-        .add(7, "hours")
-        .format("YYYY-MM-DD เวลา HH:mm:ss");
-      return time;
-    },
-
-    async check_Credit(item, index) {
-      const res = await this.checkCredit({
-        username: item.Username,
-        provider_code: item.ProviderCode
-      });
-      this.itemtable[index].test = res.data.balance;
-    },
-
     async search(username) {
       this.showtable = true;
       console.log(username);
       this.isLoading = true;
-      const a = await this.credit_history({
-        username: username,
-        limit: this.limit
-      });
+      try {
+        const a = await this.credit_history({
+          username: username,
+          limit: this.limit
+        });
 
-      this.itemtable = a.data.Data;
-      this.itemtable = this.itemtable.map(x => {
-        return {
-          ...x,
-          test: null
-        };
-      });
+        this.itemtable = a.data.Data;
+        this.itemtable = this.itemtable.map(x => {
+          return {
+            ...x,
+            test: null
+          };
+        });
+      } catch (error) {}
+
       let { data: memberdata } = await this.getMember({
         Id: a.data.Id,
         limit: this.limit
@@ -369,22 +354,6 @@ export default {
 
       this.isLoading = false;
       return a.data;
-    },
-
-    async repareCredit() {
-      this.isLoading = true;
-      const res3 = await this.repairTransaction({
-        username: this.username,
-        active_provider: this.renderdata.ActiveProvider,
-        repair: this.repair
-      });
-      if (res3.data.sum > 0) {
-        this.isLoading = false;
-        this.$swal("ยอดเงินที่ซ่อม " + res3.data.sum + " การซ่อมสำเร็จ");
-      } else {
-        this.isLoading = false;
-        this.$swal("การซ่อมสำเร็จ ไม่มีเงินค้างในค่ายอื่น");
-      }
     }
   }
 };

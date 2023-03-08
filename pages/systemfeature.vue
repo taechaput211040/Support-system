@@ -3,9 +3,7 @@
     <v-row>
       <v-container>
         <h3 class="text-center mt-2">เปิด-ปิด ฟีเจอร์</h3>
-        <hr class="mt-4 mb-4" />
-
-        <div class="row">
+        <div class="row pa-3 mt-3">
           <div class="col-12 pa-2 col-sm-6">
             <v-autocomplete
               auto-select-first
@@ -78,35 +76,42 @@ export default {
           manage: true
         },
         {
-          name: "รูเล็ต",
+          name: "กงล้อนำโชค",
           manage: false
         },
         {
-          name: "กงล้อ",
+          name: "เปิดไพ่6ใบ",
           manage: false
         },
         {
-          name: "สล็อต",
+          name: "เปิดหีบสมบัติ",
           manage: false
         },
         {
-          name: "กีฬา",
+          name: "เชคอินรายวัน",
           manage: false
         },
         {
-          name: "หวย",
+          name: "สะสมแต้ม",
+          manage: false
+        },
+        {
+          name: "ของพรีเมี่ยม",
           manage: false
         }
       ]
     };
   },
   async created() {
+    try {
+      const res = await this.$store.dispatch("auth/getAllWebsite");
+      this.items = res.map(x => {
+        return { value: x.website, text: x.website };
+      });
+    } catch (error) {
+      console.log(error);
+    }
     // await this.getProvider();
-    const res = await this.$store.dispatch("auth/getAllWebsite");
-
-    this.items = res.map(x => {
-      return { value: x.website, text: x.website };
-    });
   },
   methods: {
     Toggle(Bool, index) {},
