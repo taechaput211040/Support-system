@@ -4,20 +4,6 @@
       <v-container>
         <h3 class="text-center mt-2 mb-4">เช็คข้อมูลสมาชิก</h3>
 
-        <div class="col-12 pa-0 col-sm-6">
-          <v-autocomplete
-            auto-select-first
-            clearable
-            small-chips
-            solo
-            :items="items"
-            label="กรอก เว็บไซต์"
-            outlined
-            dense
-            v-model="website"
-          ></v-autocomplete>
-        </div>
-
         <v-row class="select-item p-0">
           <v-col cols="8" md="2">
             <v-text-field
@@ -30,14 +16,19 @@
           ></v-col>
 
           <v-col>
+            <v-btn color="green lighten-1" dark depressed @click="search">
+              ค้นหา
+            </v-btn>
             <v-btn
-              color="green lighten-1"
-              class="col-12 col-md-1"
+              color=" lighten-1 black"
+              rounded
+              v-if="itemtable.length > 0"
               dark
               depressed
-              @click="search"
+              @click="clearCatch()"
             >
-              ค้นหา
+              <v-icon left>mdi-refresh</v-icon>
+              เคลียแคช
             </v-btn></v-col
           >
         </v-row>
@@ -61,6 +52,9 @@
               hide-default-footer
               :items-per-page="100"
             >
+              <template #[`item.updated_at`]="{ item }">
+                {{ item.updated_at | dateFormat }}
+              </template>
               <template #[`item.setting`]="{item}">
                 <div class="d-flex pa-1">
                   <v-btn
@@ -87,7 +81,14 @@
                   >
                     เชคเทิร์น
                   </v-btn>
-                  
+                  <v-btn
+                    dark
+                    small
+                    color="black gry-2"
+                    @click.stop="handleClickInfo(item)"
+                  >
+                    ดูข้อมูล
+                  </v-btn>
                 </div>
               </template>
               <template #[`item.no`]="{index}">
@@ -144,10 +145,96 @@
                     {{ item.requsettime | dateFormat }} </template
                   ><template #[`item.transferTime`]="{ item }">
                     {{ item.requsettime | dateFormat }}
-                  </template></v-data-table
-                >
+                  </template>
+                </v-data-table>
               </v-card></v-card
             >
+          </v-dialog>
+          <v-dialog v-model="dlInfo" max-width="700">
+            <v-card class="pa-3">
+              <v-card-title class="justify-center">
+                ข้อมูลของ :
+                <span class="font-weight-bold primary--text mx-1">{{
+                  itemInfo.username
+                }}</span></v-card-title
+              >
+
+              <v-card class="pa-2">
+                <h3 class="pa-2">ข้อมูลเบื้อต้น</h3>
+                <div class="row pa-3">
+                  <div class="col-6">
+                    ชื่อ-นามสกุล : {{ itemInfo.name }} {{ itemInfo.lastname }}
+                  </div>
+                  <div class="col-6">
+                    ชื่อ-นามสกุล(อังกฤษ) : {{ itemInfo.nameEng || "-" }}
+                    {{ itemInfo.lastnameEng }}
+                  </div>
+                  <div class="col-6">ชื่อธนาคาร : {{ itemInfo.bankName }}</div>
+                  <div class="col-6">
+                    หมายเลขธนาคาร : {{ itemInfo.bankAcc }}
+                  </div>
+                  <div class="col-6">
+                    หมายเลขโทรศัพท์มือถือ : {{ itemInfo.phone }}
+                  </div>
+                  <div class="col-6">LINE : {{ itemInfo.lineID || "-" }}</div>
+                  <div class="col-6">
+                    ผู้แนะนำ : {{ itemInfo.lineID || "-" }}
+                  </div>
+                  <div class="col-6">
+                    รู้จักมาจาก : {{ itemInfo.knowFrom || "-" }}
+                  </div>
+                </div>
+              </v-card>
+              <v-card class="pa-2 mt-4">
+                <h3 class="pa-2">ข้อมูลการตั้งค่า</h3>
+                <div class="row pa-3">
+                  <div class="col-6">
+                    ฝากออโต้ :
+                    <v-chip color="success" small v-if="itemInfo.dpAuto"
+                      ><v-icon left>mdi-circle</v-icon>
+                      {{ itemInfo.dpAuto ? "เปิด" : "ปิด" }}</v-chip
+                    >
+                    <v-chip color="error" small v-else
+                      ><v-icon left>mdi-circle</v-icon>
+                      {{ itemInfo.dpAuto ? "เปิด" : "ปิด" }}</v-chip
+                    >
+                  </div>
+                  <div class="col-6">
+                    ถอนออโต้ :
+                    <v-chip color="success" small v-if="itemInfo.wdAuto"
+                      ><v-icon left>mdi-circle</v-icon>
+                      {{ itemInfo.wdAuto ? "เปิด" : "ปิด" }}</v-chip
+                    >
+                    <v-chip color="error" small v-else
+                      ><v-icon left>mdi-circle</v-icon>
+                      {{ itemInfo.wdAuto ? "เปิด" : "ปิด" }}</v-chip
+                    >
+                  </div>
+                  <div class="col-6">
+                    สถานะการใช้งาน :
+                    <v-chip color="success" small v-if="itemInfo.status"
+                      ><v-icon left>mdi-circle</v-icon>
+                      {{ itemInfo.status ? "เปิด" : "ปิด" }}</v-chip
+                    >
+                    <v-chip color="error" small v-else
+                      ><v-icon left>mdi-circle</v-icon>
+                      {{ itemInfo.status ? "เปิด" : "ปิด" }}</v-chip
+                    >
+                  </div>
+                  <div class="col-6">สมัครโดย : {{ itemInfo.operator }}</div>
+                </div>
+              </v-card>
+              <v-card-actions class="justify-center">
+                <v-btn
+                  dark
+                  small
+                  color="error gry-2"
+                  @click.stop="dlInfo = false"
+                >
+                  ปิด
+                </v-btn>
+              </v-card-actions>
+            </v-card>
           </v-dialog>
         </template>
       </v-container>
@@ -159,6 +246,8 @@ import { mapActions, mapState } from "vuex";
 export default {
   data() {
     return {
+      dlInfo: false,
+      itemInfo: {},
       username: null,
       website: null,
       itemswithdraw: [],
@@ -360,22 +449,13 @@ export default {
       itemtable: []
     };
   },
-  async created() {
-    // await this.getProvider();
-    try {
-      const res = await this.getAllWebsite();
 
-      this.items = res.map(x => {
-        return { value: x.website, text: x.website };
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  },
   methods: {
+    async handleClickInfo(itemInfo) {
+      this.itemInfo = { ...itemInfo };
+      this.dlInfo = true;
+    },
     ...mapActions("auth", {
-      getProviderList: "getProviderList",
-      getAllWebsite: "getAllWebsite",
       getMemberInfo: "getMemberInfo",
       getMemberDeposit: "getMemberDeposit",
       getMemberWithdraw: "getMemberWithdraw"
@@ -441,6 +521,25 @@ export default {
           username: item.username
         });
         console.log(turnstatus, "turnstatus");
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async clearCatch() {
+      //** clearcatchapi */
+      try {
+        let res = await this.$store.dispatch(
+          "member/clearCatch",
+          this.username
+        );
+        this.$swal({
+          icon: "success",
+          title: `Clear Catch เสร็จสิ้น`,
+          showConfirmButton: false,
+          timer: 1500
+        });
+        await this.search();
+        console.log(res);
       } catch (error) {
         console.log(error);
       }

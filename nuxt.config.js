@@ -49,6 +49,10 @@ export default {
     ALL_DEPOSIT: process.env.ALL_DEPOSIT,
     ALL_WITHDRAW: process.env.ALL_WITHDRAW,
     ALL_SUPPORT_V2: process.env.ALL_SUPPORT_V2,
-    ALL_SETTING: process.env.ALL_SETTING
+    ALL_SETTING: process.env.ALL_SETTING,
+    ALL_MESSAGE: process.env.ALL_MESSAGE,
+    ALL_RICO_USER: process.env.ALL_RICO_USER,
+    ALL_COMPANY_BANK: process.env.ALL_COMPANY_BANK,
+    ALL_RICO_REPORT: process.env.ALL_RICO_REPORT
   }
 };

@@ -1,6 +1,8 @@
 <template>
-  <div>
-    <div class="row">
+  <div class="container">
+    <loading-page v-if="loading"></loading-page>
+    <h3 class="text-center">เช็คข้อมูลเว็ปไซต์</h3>
+    <div class="row pa-4 mt-5">
       <div class="col-12 pa-2 col-sm-6">
         <v-autocomplete
           auto-select-first
@@ -19,29 +21,57 @@
       </div>
     </div>
 
-    -เชคข้อมูล ข้อมูลเว็ป -ตั้งค่าระบบ -พนักงาน -รายการสรุปกำไรขาดทุน -ธนาคาร
-    -โปรโมชั่น
-    <v-card class="rounded-lg elevation-2 pa-3 ma-2">
+    <v-card class="rounded-lg elevation-2 pa-3 ma-2" v-if="selectItem">
       <div class="row">
         <div class="col-12 col-md-6">
-          <system-show :datasetting="systemSetting"></system-show>
+          <report-profit :iteminfo="selectItem"></report-profit>
         </div>
-        <div class="col-12 col-sm-6"></div>
+        <div class="col-12 col-md-6">
+          <system-show
+            :message="message"
+            :datasetting="systemSetting"
+          ></system-show>
+        </div>
+        <div class="col-12 col-sm-6">
+          <employee-list :employee="employeelist"></employee-list>
+        </div>
+        <div class="col-12 col-sm-6">
+          <bank-list :dataBank="bankCompany"></bank-list>
+        </div>
       </div>
     </v-card>
+    <v-alert dense text type="success" v-else
+      >เลือกวันที่ที่ต้องการด้านบนแล้วกดค้นหาเพื่อเช็คข้อมูลเว็ปไซต์</v-alert
+    >
   </div>
 </template>
 
 <script>
+import BankList from "../components/infoweb/BankList.vue";
+import EmployeeList from "../components/infoweb/EmployeeList.vue";
+import ReportProfit from "../components/infoweb/ReportProfit.vue";
 import SystemShow from "../components/infoweb/SystemShow.vue";
+import LoadingPage from "../components/LoadingPage.vue";
 export default {
-  components: { SystemShow },
+  components: { SystemShow, EmployeeList, BankList, ReportProfit, LoadingPage },
   data() {
     return {
       itemweb: [],
       selectWeb: "",
-      systemSetting: {}
+      systemSetting: {},
+      message: {},
+      employeelist: [],
+      bankCompany: [],
+      selectItem: null,
+      loading: false
     };
+  },
+  watch: {
+    selectWeb: {
+      async handler() {
+        this.selectItem = null;
+      }
+    }
   },
   async mounted() {
     const res = await this.$store.dispatch("auth/getAllWebsite");
@@ -51,13 +81,43 @@ export default {
   },
   methods: {
     async getAllDataInfo() {
-      console.log(this.selectWeb, "this.selectWeb");
+      this.loading = true;
       let select = this.itemweb.find(x => x.hash == this.selectWeb);
-      console.log(select, "select");
+      this.selectItem = select;
       this.systemSetting = await this.$store.dispatch(
         "setting/getSystemSetting",
         select.hash
       );
+      await this.getMessage(select.hash);
+      await this.getEmployee(select.agent_username);
+      await this.getBankCompany(select.hash);
+      this.loading = false;
+    },
+    async getMessage(hash) {
+      try {
+        this.message = await this.$store.dispatch(
+          "setting/getWebMessage",
+          hash
+        );
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async getEmployee(agent) {
+      try {
+        let { data } = await this.$store.dispatch("setting/getEmployee", agent);
+        this.employeelist = data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async getBankCompany(hash) {
+      try {
+        let data = await this.$store.dispatch("setting/getCompanybank", hash);
+        this.bankCompany = data;
+      } catch (error) {
+        console.log(error);
+      }
     }
   }
 };

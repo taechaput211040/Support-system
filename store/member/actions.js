@@ -161,3 +161,15 @@ export function editMember(context, body) {
     }
   });
 }
+export function clearCatch(context, user) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let response = await this.$axios.get(
+        `${process.env.ALL_MEMBER}/api/Member/Agent/ClearCache/${user}`
+      );
+      resolve(response);
+    } catch (error) {
+      reject(error);
+    }
+  });
+}

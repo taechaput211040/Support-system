@@ -1,8 +1,8 @@
 <template>
   <v-flex>
-    <h5 class="mb-4">ตั้งค่าระบบ</h5>
+    <h3 class="mb-4">ตั้งค่าระบบ</h3>
     <v-card class="pa-3 elevation-3 rounded-lg font-weight-bold">
-      <v-row v-if="datasetting">
+      <v-row >
         <v-col cols="12" sm="6">
           ชื่อเว็ปไซต์
           <v-text-field
@@ -122,6 +122,7 @@
         <v-col cols="12" sm="6">
           อั้นถอนจำนวนครั้งต่อวัน
           <v-switch
+            disabled
             hide-details="auto"
             v-model="datasetting.wdlimit_time_status"
           ></v-switch>
@@ -138,12 +139,13 @@
       </v-row>
       <v-divider class="my-4"></v-divider>
     </v-card>
-    <h5 class="my-4">ตั้งค่าข้อความต้อนรับ</h5>
+    <h3 class="my-4">ตั้งค่าข้อความต้อนรับ</h3>
     <v-card class="pa-3 elevation-3 rounded-lg" v-if="message">
       <v-switch
         hide-details="auto"
         class="my-4 font-weight-bold"
         label="สถานะ"
+        disabled
         v-model.number="message.status"
       ></v-switch>
       <div v-if="message.status == 1">
