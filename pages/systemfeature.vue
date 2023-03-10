@@ -2,7 +2,8 @@
   <v-flex>
     <v-row>
       <v-container>
-        <h3 class="text-center mt-2">เปิด-ปิด ฟีเจอร์</h3>
+        <h2 class="text-center mt-2 mb-4">เปิด-ปิด ฟีเจอร์</h2>
+
         <div class="row pa-3 mt-3">
           <div class="col-12 pa-2 col-sm-6">
             <v-autocomplete

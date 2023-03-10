@@ -1,156 +1,40 @@
 <template>
-  <v-flex
-    ><v-row>
-      <v-container>
-        <h3 class="text-center mt-2 mb-4">เช็คข้อมูลสมาชิก</h3>
+  <v-flex>
+    <v-container>
+      <h2 class="text-center mt-2 mb-4">เช็คข้อมูลสมาชิก</h2>
 
-        <v-row class="select-item p-0">
-          <v-col cols="8" md="2">
-            <v-text-field
-              v-model="username"
-              outlined
-              solo
-              dense
-              label="กรอก Username"
-            ></v-text-field
-          ></v-col>
+      <v-row class="select-item p-0">
+        <v-col cols="8" md="2">
+          <v-text-field
+            v-model="username"
+            outlined
+            solo
+            dense
+            label="กรอก Username"
+          ></v-text-field
+        ></v-col>
 
-          <v-col>
-            <v-btn color="green lighten-1" dark depressed @click="search">
-              ค้นหา
-            </v-btn>
-            <v-btn
-              color=" lighten-1 black"
-              rounded
-              v-if="itemtable.length > 0"
-              dark
-              depressed
-              @click="clearCatch()"
-            >
-              <v-icon left>mdi-refresh</v-icon>
-              เคลียแคช
-            </v-btn></v-col
+        <v-col>
+          <v-btn color="green lighten-1" dark depressed @click="search">
+            ค้นหา
+          </v-btn>
+          <v-btn
+            color=" lighten-1 black"
+            rounded
+            v-if="itemInfo"
+            dark
+            depressed
+            @click="clearCatch()"
           >
-        </v-row>
+            <v-icon left>mdi-refresh</v-icon>
+            เคลียแคช
+          </v-btn></v-col
+        >
+      </v-row>
 
-        <template>
-          <!-- <v-card-title>
-            <v-col cols="6" md="3">
-              <v-text-field
-                v-model="search"
-                append-icon="mdi-magnify"
-                label="Search"
-                single-line
-                hide-details
-              ></v-text-field
-            ></v-col>
-          </v-card-title> -->
-          <v-card class="mx-auto mt-5 justify-center classtable">
-            <v-data-table
-              :headers="headers"
-              :items="itemtable"
-              hide-default-footer
-              :items-per-page="100"
-            >
-              <template #[`item.updated_at`]="{ item }">
-                {{ item.updated_at | dateFormat }}
-              </template>
-              <template #[`item.setting`]="{item}">
-                <div class="d-flex pa-1">
-                  <v-btn
-                    dark
-                    small
-                    color="success gry-2"
-                    @click.stop="todeposit(item)"
-                  >
-                    ฝาก
-                  </v-btn>
-                  <v-btn
-                    dark
-                    small
-                    color="error gry-2"
-                    @click.stop="towithdraw(item)"
-                  >
-                    ถอน
-                  </v-btn>
-                  <v-btn
-                    dark
-                    small
-                    color="pink gry-2"
-                    @click.stop="checkturnTowithdraw(item)"
-                  >
-                    เชคเทิร์น
-                  </v-btn>
-                  <v-btn
-                    dark
-                    small
-                    color="black gry-2"
-                    @click.stop="handleClickInfo(item)"
-                  >
-                    ดูข้อมูล
-                  </v-btn>
-                </div>
-              </template>
-              <template #[`item.no`]="{index}">
-                {{ index + 1 }}
-              </template>
-              <template #[`item.created_at`]="{item}">
-                {{ item.created_at | dateFormat }}
-              </template>
-              <template #[`item.bank`]="{item}">
-                <!-- <v-avatar color="indigo lighten-1 elevation-3">
-                  <v-icon dark>
-                    <img v-if="item.bank == 'KTB'" src="" />
-                  </v-icon>
-                </v-avatar> -->
-                {{ item.bank }}
-              </template></v-data-table
-            >
-          </v-card>
-          <v-dialog v-model="deposit">
-            <v-card class="pa-3">
-              <p class="outlined text--h3">
-                รายการฝากล่าสุด : {{ itemsdeposit.length }} รายการ
-              </p>
-              <v-divider class="pt-2 pb-2"> </v-divider>
-              <v-card>
-                <v-data-table
-                  width="70%"
-                  :items="itemsdeposit"
-                  :headers="headersdeposit"
-                >
-                  <template #[`item.smsdatetime`]="{ item }">
-                    {{ item.smsdatetime | dateFormat }}
-                  </template>
-                  <template #[`item.created_at`]="{ item }">
-                    {{ item.created_at | dateFormat }}
-                  </template></v-data-table
-                >
-              </v-card></v-card
-            >
-          </v-dialog>
-          <v-dialog v-model="withdraw" max-width="80%">
-            <v-card class="pa-3">
-              <p class="outlined text--h3">
-                รายการถอนล่าสุด : {{ itemswithdraw.length }} รายการ
-              </p>
-              <v-divider class="pt-2 pb-2"> </v-divider>
-              <v-card>
-                <v-data-table
-                  width="70%"
-                  :items="itemswithdraw"
-                  :headers="headerswithdraw"
-                >
-                  <template #[`item.requsettime`]="{ item }">
-                    {{ item.requsettime | dateFormat }} </template
-                  ><template #[`item.transferTime`]="{ item }">
-                    {{ item.requsettime | dateFormat }}
-                  </template>
-                </v-data-table>
-              </v-card></v-card
-            >
-          </v-dialog>
-          <v-dialog v-model="dlInfo" max-width="700">
+      <div v-if="itemInfo">
+        <div class="row">
+          <div class="col-12 col-sm-6">
             <v-card class="pa-3">
               <v-card-title class="justify-center">
                 ข้อมูลของ :
@@ -160,10 +44,11 @@
               >
 
               <v-card class="pa-2">
-                <h3 class="pa-2">ข้อมูลเบื้อต้น</h3>
+                <h3 class="pa-2">ข้อมูลเบื้องต้น</h3>
                 <div class="row pa-3">
                   <div class="col-6">
-                    ชื่อ-นามสกุล : {{ itemInfo.name }} {{ itemInfo.lastname }}
+                    ชื่อ-นามสกุล : {{ itemInfo.name }}
+                    {{ itemInfo.lastname }}
                   </div>
                   <div class="col-6">
                     ชื่อ-นามสกุล(อังกฤษ) : {{ itemInfo.nameEng || "-" }}
@@ -224,22 +109,66 @@
                   <div class="col-6">สมัครโดย : {{ itemInfo.operator }}</div>
                 </div>
               </v-card>
-              <v-card-actions class="justify-center">
-                <v-btn
-                  dark
-                  small
-                  color="error gry-2"
-                  @click.stop="dlInfo = false"
-                >
-                  ปิด
-                </v-btn>
-              </v-card-actions>
             </v-card>
-          </v-dialog>
-        </template>
-      </v-container>
-    </v-row></v-flex
-  >
+          </div>
+          <div class="col-12 col-sm-6 "></div>
+          <div class="col-12 ">
+            <v-card class="pa-3">
+              <v-card-title class="justify-center">
+                <span class="success--text font-weight-bold">
+                  รายการฝากล่าสุด :
+                </span>
+                {{ itemsdeposit.length }} รายการ
+              </v-card-title>
+              <v-divider class="pt-2 pb-2"> </v-divider>
+              <v-card>
+                <v-data-table
+                  width="70%"
+                  :items="itemsdeposit"
+                  :headers="headersdeposit"
+                >
+                  <template #[`item.smsdatetime`]="{ item }">
+                    {{ item.smsdatetime | dateFormat }}
+                  </template>
+                  <template #[`item.created_at`]="{ item }">
+                    {{ item.created_at | dateFormat }}
+                  </template></v-data-table
+                >
+              </v-card></v-card
+            >
+          </div>
+          <div class="col-12 ">
+            <v-card class="pa-3">
+              <v-card-title class="justify-center">
+                <span class="error--text font-weight-bold"
+                  >รายการถอนล่าสุด :
+                </span>
+                {{ itemswithdraw.length }} รายการ
+              </v-card-title>
+              <v-divider class="pt-2 pb-2"> </v-divider>
+              <v-card>
+                <v-data-table
+                  width="70%"
+                  :items="itemswithdraw"
+                  :headers="headerswithdraw"
+                >
+                  <template #[`item.requsettime`]="{ item }">
+                    {{ item.requsettime | dateFormat }} </template
+                  ><template #[`item.transferTime`]="{ item }">
+                    {{ item.requsettime | dateFormat }}
+                  </template>
+                </v-data-table>
+              </v-card></v-card
+            >
+          </div>
+        </div>
+      </div>
+      <v-alert dense text type="success" v-else
+        >กรอก Username
+        ที่ต้องการค้นหาด้านบนแล้วกดค้นหาเพื่อเช็คข้อมูลสมาชิก</v-alert
+      >
+    </v-container>
+  </v-flex>
 </template>
 <script>
 import { mapActions, mapState } from "vuex";
@@ -247,7 +176,7 @@ export default {
   data() {
     return {
       dlInfo: false,
-      itemInfo: {},
+      itemInfo: null,
       username: null,
       website: null,
       itemswithdraw: [],
@@ -297,7 +226,7 @@ export default {
           sortable: false
         },
         {
-          text: "กดถอนโดย",
+          text: "ถอนโดย",
           value: "operator",
           class: "grey darken-2 white--text",
           sortable: false
@@ -467,8 +396,9 @@ export default {
             username: this.username
             // website: this.website
           });
-          this.itemtable = [m.data];
-          this.showtable = true;
+          this.itemInfo = m.data;
+          await this.todeposit(this.itemInfo);
+          await this.towithdraw(this.itemInfo);
         } catch (error) {
           this.$swal({
             icon: "error",
@@ -494,9 +424,6 @@ export default {
           // website: this.website
         });
         this.itemsdeposit = m.data;
-        this.showtable = true;
-
-        this.deposit = true;
       } catch (error) {
         console.log(error);
       }
@@ -508,9 +435,6 @@ export default {
           // website: this.radioGroup
         });
         this.itemswithdraw = m.data;
-        this.showtable = true;
-
-        this.withdraw = true;
       } catch (error) {
         console.log(error);
       }

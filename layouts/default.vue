@@ -148,24 +148,18 @@ export default {
           status: true
         },
         {
-          title: "จัดการสมาชิก",
-          icon: "mdi-account",
-          status: true,
-          subLinks: [
-            {
-              icon: "mdi-view-dashboard",
-              text: "เช็คข้อมูลปัจจุบัน/จำนวนเทิร์น",
-              to: "/member/memberCheck",
-              status: true
-            },
-            {
-              icon: "mdi-view-dashboard",
-              text: "เช็คข้อมูลการเล่น",
-              to: "/member/memberReportTransaction",
-              status: true
-            }
-          ]
+          title: "เช็คข้อมูลปัจจุบัน/จำนวนเทิร์น",
+          icon: "mdi-history",
+          to: "/member/memberCheck",
+          status: true
         },
+        {
+          title: "เช็คข้อมูลการเล่น",
+          icon: "mdi-view-dashboard",
+          to: "/member/memberReportTransaction",
+          status: true
+        },
+
         {
           title: "ข้อมูลเว็ปไซต์",
           icon: "mdi-history",
@@ -181,7 +175,7 @@ export default {
         {
           title: "เช็คข้อมูลโปรโมชั่น",
           icon: "mdi-history",
-          to: "/promotion/generalPromotion",
+          to: "/generalPromotion",
           status: true
         },
         {

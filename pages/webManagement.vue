@@ -3,7 +3,8 @@
     ><v-row>
       <loading-page v-if="isLoading"></loading-page>
       <v-container>
-        <h3 class="text-center mt-2 mb-4">เปิด-ปิดเว็ปไซต์</h3>
+        <h2 class="text-center mt-2 mb-4">เปิด-ปิดเว็ปไซต์</h2>
+
         <div class="row">
           <div class="col-12 pa-2 col-sm-6">
             <v-text-field
@@ -43,29 +44,35 @@
             </template>
 
             <template #[`item.wd_status`]="{ item }">
-              <v-switch
-                @change="changeWithdraw(item)"
-                hide-details="auto"
-                v-model="item.wd_status"
-              ></v-switch>
+              <div class="d-flex justify-center">
+                <v-switch
+                  @change="changeWithdraw(item)"
+                  hide-details
+                  v-model="item.wd_status"
+                ></v-switch>
+              </div>
             </template>
             <template #[`item.system_status`]="{ item }">
-              <v-switch
-                @change="changeSystem(item)"
-                hide-details="auto"
-                v-model="item.system_status"
-              ></v-switch>
+              <div class="d-flex justify-center">
+                <v-switch
+                  @change="changeSystem(item)"
+                  hide-details
+                  v-model="item.system_status"
+                ></v-switch>
+              </div>
             </template>
             <template #[`item.actions`]="{item}">
-              <v-btn class="ma-2" @click="LockDown(item)" icon small
-                ><v-icon>mdi-lock</v-icon></v-btn
-              >
-            </template>
-          </v-data-table></v-card
-        >
-      </v-container>
-    </v-row></v-flex
-  >
+              <div class="d-flex justify-center">
+                <v-switch
+                  @change="LockDown(item)"
+                  hide-details
+                  v-model="item.lockdown_status"
+                ></v-switch>
+              </div>
+            </template> </v-data-table
+        ></v-card>
+      </v-container> </v-row
+  ></v-flex>
 </template>
 <script>
 import LoadingPage from "../components/LoadingPage.vue";
@@ -219,6 +226,11 @@ export default {
       });
     },
     async LockDown(value) {
+      console.log(value, "value");
+      let payload = {
+        site_id: value.id,
+        status: value.lockdown_status
+      };
       this.$swal({
         title: `Lockdown Website??`,
         icon: "question",
@@ -231,7 +243,7 @@ export default {
       }).then(async result => {
         if (result.isConfirmed) {
           this.isLoading = true;
-          await this.$store.dispatch("setting/lockdownWebsite", value.id);
+          await this.$store.dispatch("setting/lockdownWebsite", payload);
           await this.$swal({
             icon: "success",
             title: `Lockdown เสร็จสิ้น`,
@@ -240,6 +252,8 @@ export default {
             timer: 1500
           });
           await this.getData();
+        } else {
+          value.lockdown_status = !value.lockdown_status;
         }
       });
     }

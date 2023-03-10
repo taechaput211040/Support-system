@@ -173,3 +173,57 @@ export function clearCatch(context, user) {
     }
   });
 }
+export function get5DepositRecord(context, username) {
+  // console.log(context.state)
+  // return
+
+  return new Promise(async (resolve, reject) => {
+    try {
+      let response = await this.$axios.get(
+        `${process.env.ALL_SUPPORT}/api/Website/Deposit5/${username}`
+      );
+      console.log(response.data);
+      resolve(response);
+    } catch (error) {
+      reject(error);
+    }
+  });
+}
+export function getTransactionMember(context, params) {
+  // console.log(context.state)
+  // return
+  return new Promise(async (resolve, reject) => {
+    try {
+      let response = await this.$axios.get(
+        `${process.env.REAL_TIME_REPORT_URL_SEAMLESS}/memberProvider`,
+        { params }
+      );
+      console.log(response.data);
+      resolve(response);
+    } catch (error) {
+      reject(error);
+    }
+  });
+}
+export async function getDetailLink(context, url) {
+  // return
+
+  return new Promise(async (resolve, reject) => {
+    //get turn
+
+    try {
+      let result = await this.$axios.post(
+        `${process.env.ALL_SUPPORT}/api/Website/Betdetail`,
+        { url: url }
+      );
+
+      resolve(result);
+    } catch (error) {
+      console.log(error);
+      reject(error);
+    }
+    //get credit
+
+    //get winlose
+  });
+}

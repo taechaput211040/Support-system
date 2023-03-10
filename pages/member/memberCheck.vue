@@ -2,11 +2,13 @@
   <v-flex>
     <loading-page v-if="isLoading"></loading-page>
     <v-container>
-      <h3 class="mb-2">เช็คข้อมูลการเล่นของลูกค้า / จำนวนเทิร์น</h3>
+      <h2 class="text-center mt-2 mb-4">
+        เช็คข้อมูลการเล่นของลูกค้า / จำนวนเทิร์น
+      </h2>
       <v-row>
         <v-col lg="6" sm="12" md="12" cols="12">
           <div class=" card-child elevation-5">
-            <v-row class="d-flex align-baseline ma-auto"
+            <v-row class="d-flex align-baseline"
               ><v-col
                 cols="12"
                 sm="12"
@@ -30,7 +32,12 @@
                   </v-icon>
                   ค้นหา</v-btn
                 >
-                <v-btn color="pink" dark @click="changeTurn">
+                <v-btn
+                  color="pink"
+                  dark
+                  @click="changeTurn"
+                  v-if="serchsuccess"
+                >
                   <v-icon left dark>
                     mdi-pencil
                   </v-icon>
@@ -127,16 +134,16 @@
       </v-card>
     </v-container>
     <v-dialog v-model="dialogFixTurn" max-width="1000">
-      <v-card>
+      <v-card class="pa-3">
         <v-card-title>
           <h4>แก้ไขเทิร์น</h4>
         </v-card-title>
 
-        <v-row v-if="turn_fix" class="px-5">
-          <v-col lg="4" sm="4" cols="4" class="px-5">
+        <v-row v-if="turn_fix">
+          <v-col lg="4" sm="4" cols="4">
             <h4>SLOT</h4>
           </v-col>
-          <v-col lg="4" sm="12" md="4" cols="12" class="px-5">
+          <v-col lg="4" sm="12" md="4" cols="12">
             <v-text-field
               label="TURN SLOT"
               placeholder="กรอกจำนวนวางเดิมพันที่ต้องทำ"
@@ -149,7 +156,7 @@
               hide-details="auto"
             ></v-text-field>
           </v-col>
-          <v-col lg="4" sm="12" md="4" cols="12" class="px-5">
+          <v-col lg="4" sm="12" md="4" cols="12">
             <v-text-field
               label="TURN SLOT ที่ต้องการ"
               placeholder="กรอกจำนวนวางเดิมพันที่ต้องทำ"
@@ -161,10 +168,10 @@
               hide-details="auto"
             ></v-text-field>
           </v-col>
-          <v-col lg="4" cols="4" class="px-5">
+          <v-col lg="4" cols="4">
             <h4>CASINO</h4>
           </v-col>
-          <v-col lg="4" sm="12" md="4" cols="12" class="px-5">
+          <v-col lg="4" sm="12" md="4" cols="12">
             <v-text-field
               label="TURN CASINO"
               placeholder="กรอกจำนวนวางเดิมพันที่ต้องทำ"
@@ -177,7 +184,7 @@
               hide-details="auto"
             ></v-text-field>
           </v-col>
-          <v-col lg="4" sm="12" md="4" cols="12" class="px-5">
+          <v-col lg="4" sm="12" md="4" cols="12">
             <v-text-field
               label="TURN CASINO ที่ต้องการ"
               placeholder="กรอกจำนวนวางเดิมพันที่ต้องทำ"
@@ -189,10 +196,10 @@
               hide-details="auto"
             ></v-text-field>
           </v-col>
-          <v-col lg="4" cols="4" class="px-5">
+          <v-col lg="4" cols="4">
             <h4>SPORTBOOK</h4>
           </v-col>
-          <v-col lg="4" sm="12" md="4" cols="12" class="px-5">
+          <v-col lg="4" sm="12" md="4" cols="12">
             <v-text-field
               label="TURN SPORTBOOK"
               placeholder="กรอกจำนวนวางเดิมพันที่ต้องทำ"
@@ -205,7 +212,7 @@
               hide-details="auto"
             ></v-text-field>
           </v-col>
-          <v-col lg="4" sm="12" md="4" cols="12" class="px-5">
+          <v-col lg="4" sm="12" md="4" cols="12">
             <v-text-field
               label="TURN SPORTBOOK ที่ต้องการ"
               placeholder="กรอกจำนวนวางเดิมพันที่ต้องทำ"
@@ -217,10 +224,10 @@
               hide-details="auto"
             ></v-text-field>
           </v-col>
-          <v-col lg="4" cols="4" class="px-5">
+          <v-col lg="4" cols="4">
             <h4>ESPORT</h4>
           </v-col>
-          <v-col lg="4" sm="12" md="4" cols="12" class="px-5">
+          <v-col lg="4" sm="12" md="4" cols="12">
             <v-text-field
               label="TURN ESPORT"
               placeholder="กรอกจำนวนวางเดิมพันที่ต้องทำ"
@@ -233,7 +240,7 @@
               hide-details="auto"
             ></v-text-field>
           </v-col>
-          <v-col lg="4" sm="12" md="4" cols="12" class="px-5">
+          <v-col lg="4" sm="12" md="4" cols="12">
             <v-text-field
               label="TURN ESPORT ที่ต้องการ"
               placeholder="กรอกจำนวนวางเดิมพันที่ต้องทำ"
@@ -245,10 +252,10 @@
               hide-details="auto"
             ></v-text-field>
           </v-col>
-          <v-col lg="4" cols="4" class="px-5">
+          <v-col lg="4" cols="4">
             <h4>FISHING</h4>
           </v-col>
-          <v-col lg="4" sm="12" md="4" cols="12" class="px-5">
+          <v-col lg="4" sm="12" md="4" cols="12">
             <v-text-field
               label="TURN FISHING"
               placeholder="กรอกจำนวนวางเดิมพันที่ต้องทำ"
@@ -261,7 +268,7 @@
               hide-details="auto"
             ></v-text-field>
           </v-col>
-          <v-col lg="4" sm="12" md="4" cols="12" class="px-5">
+          <v-col lg="4" sm="12" md="4" cols="12">
             <v-text-field
               label="TURN FISHING ที่ต้องการ"
               placeholder="กรอกจำนวนวางเดิมพันที่ต้องทำ"
@@ -273,10 +280,10 @@
               hide-details="auto"
             ></v-text-field>
           </v-col>
-          <v-col lg="4" cols="4" class="px-5">
+          <v-col lg="4" cols="4">
             <h4>LOTTO</h4>
           </v-col>
-          <v-col lg="4" sm="12" md="4" cols="12" class="px-5">
+          <v-col lg="4" sm="12" md="4" cols="12">
             <v-text-field
               label="TURN LOTTO"
               placeholder="กรอกจำนวนวางเดิมพันที่ต้องทำ"
@@ -289,7 +296,7 @@
               hide-details="auto"
             ></v-text-field>
           </v-col>
-          <v-col lg="4" sm="12" md="4" cols="12" class="px-5">
+          <v-col lg="4" sm="12" md="4" cols="12">
             <v-text-field
               label="TURN LOTTO ที่ต้องการ"
               placeholder="กรอกจำนวนวางเดิมพันที่ต้องทำ"
@@ -301,10 +308,10 @@
               hide-details="auto"
             ></v-text-field>
           </v-col>
-          <v-col lg="4" cols="4" class="px-5">
+          <v-col lg="4" cols="4">
             <h4>OTHERS</h4>
           </v-col>
-          <v-col lg="4" sm="12" md="4" cols="12" class="px-5">
+          <v-col lg="4" sm="12" md="4" cols="12">
             <v-text-field
               label="TURN OTHERS"
               placeholder="กรอกจำนวนวางเดิมพันที่ต้องทำ"
@@ -317,7 +324,7 @@
               hide-details="auto"
             ></v-text-field>
           </v-col>
-          <v-col lg="4" sm="12" md="4" cols="12" class="px-5">
+          <v-col lg="4" sm="12" md="4" cols="12">
             <v-text-field
               label="TURN OTHERS ที่ต้องการ"
               placeholder="กรอกจำนวนวางเดิมพันที่ต้องทำ"
@@ -329,10 +336,10 @@
               hide-details="auto"
             ></v-text-field>
           </v-col>
-          <v-col lg="4" cols="4" class="px-5">
+          <v-col lg="4" cols="4">
             <h4>อั้นถอนจากการเติม</h4>
           </v-col>
-          <v-col lg="4" sm="12" md="4" cols="12" class="px-5">
+          <v-col lg="4" sm="12" md="4" cols="12">
             <v-text-field
               label="อั้นถอน(บาท)"
               placeholder="กรอกจำนวนอั้นถอน"
@@ -345,7 +352,7 @@
               hide-details="auto"
             ></v-text-field>
           </v-col>
-          <v-col lg="4" sm="12" md="4" cols="12" class="px-5">
+          <v-col lg="4" sm="12" md="4" cols="12">
             <v-text-field
               label="อั้นถอนที่ต้องการ(บาท)"
               placeholder="กรอกจำนวนอั้นถอน"
@@ -381,7 +388,7 @@ export default {
     return {
       isLoading: false,
       serchsuccess: false,
-      username: "",
+      username: null,
       data: { lastest_dpref: "58579427-a2b0-41e5-9501-b9350f7804ba" },
 
       turn_new: {
@@ -490,11 +497,27 @@ export default {
       const value = turn;
       return value;
     },
+    findMinTurn(input) {
+      const obj = {
+        SLOT: input.SL,
+        FOOTBALL: input.SB,
+        CASINO: input.LC,
+        LOTTO: input.LT,
+        FISHING: input.FH,
+        HORSERACING: input.OT,
+        ESPORT: input.ES
+      };
+      const values = Object.values(obj);
+      const min = Math.min(...values);
+      console.log(min); // 👉️ 5
+      return min;
+    },
     async fixturn_confirm() {
       this.turn_fix = { ...this.turn_fix, ...this.turn_new };
       this.turn_fix.editturn = true;
-
+      this.turn_fix.min_turn = this.findMinTurn(this.turn_fix);
       await this.reMaping(this.response);
+      console.log(this.turn_fix);
       // console.log(this.turn_fix)
       try {
         this.$swal({
@@ -547,7 +570,9 @@ export default {
         this.serchsuccess = true;
         console.log(this.username);
         let response = await this.getTurnByid(this.username);
-        this.ip_data = response.data.ip_data;
+        this.ip_data = response.data.ip_data
+          ? response.data.ip_data
+          : this.ip_data_mock;
         this.turn_fix = response.data.turn;
         const display_turn = await this.mapTurn(response.data);
 

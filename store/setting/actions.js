@@ -49,7 +49,7 @@ export function lockdownWebsite(context, payload) {
       let { data } = await this.$axios.post(
         `${process.env.ALL_SUPPORT_V2}/support/site/${payload.site_id}/status/lockdown`,
         {
-          status: true,
+          status: payload.status,
           operator: "api"
         }
       );
@@ -91,7 +91,7 @@ export function getEmployee({}, agent) {
         {
           headers: {
             authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImQ0MTIwZjVkLTI0ZGItNGU4NS05ZjAyLWIxZjA3OGE3NDMyNCIsImNwIjoiYnAiLCJhZyI6ImtnIiwiaWF0IjoxNjc4MzMyMDMyLCJleHAiOjE2Nzg0MTg0MzJ9.I6Omn65h1VUE3UqvDqP6TDa-igrGzFy0jT-8CwBINmc"
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjNhMmMyMDU1LWZmMzAtNDNjMy1iNjg0LTEzY2E4OWYzZmFmMCIsImNwIjoibXYiLCJhZyI6ImFiIiwiaWF0IjoxNjc4MzUyNjIyLCJleHAiOjE2Nzg0MzkwMjJ9.SsgIoKosJKCyC29GhQTpSA_uyeFOU6JdXjn2-MnADDo"
           }
         }
       );
@@ -122,6 +122,34 @@ export async function getProfitReport({}, params) {
         {
           params: params
         }
+      );
+      resolve(data);
+    } catch (error) {
+      reject(error);
+    }
+  });
+}
+export async function getStaticHashWebsite({}, payload) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let response = await this.$axios.get(
+        `${
+          process.env.ALL_SUPPORT
+        }/api/Website/StaticInfo/${payload.company.toLowerCase()}/${payload.agent.toLowerCase()}`
+      );
+      resolve(response);
+    } catch (error) {
+      reject(error);
+    }
+  });
+}
+export async function getPromotion({}, payload) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let { data } = await this.$axios.get(
+        `${
+          process.env.ALL_PROMOTION
+        }/api/Promotion/Auto/Main/${payload.company.toLowerCase()}/${payload.agent.toLowerCase()}`
       );
       resolve(data);
     } catch (error) {

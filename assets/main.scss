@@ -541,3 +541,25 @@ button:hover {
   min-height: 100vh;
   max-width: 100%;
 }
+.img_promotion {
+  max-width: 100%;
+  height: auto;
+}
+.card_promotion {
+  .active_card {
+    background: linear-gradient(66deg, #3a742a, #6dc557);
+  }
+  .title_card {
+    border-radius: 10px 10px 0 0;
+    background-color: #4a4a4a;
+    padding: 10px;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+  }
+  background-color: #efefef;
+  border-radius: 15px;
+  .action_card {
+    background-color: #4a4a4a;
+    padding: 10px;
+  }
+}

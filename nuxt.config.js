@@ -53,6 +53,7 @@ export default {
     ALL_MESSAGE: process.env.ALL_MESSAGE,
     ALL_RICO_USER: process.env.ALL_RICO_USER,
     ALL_COMPANY_BANK: process.env.ALL_COMPANY_BANK,
-    ALL_RICO_REPORT: process.env.ALL_RICO_REPORT
+    ALL_RICO_REPORT: process.env.ALL_RICO_REPORT,
+    REAL_TIME_REPORT_URL_SEAMLESS: process.env.REAL_TIME_REPORT_URL_SEAMLESS
   }
 };

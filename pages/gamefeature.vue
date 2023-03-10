@@ -2,7 +2,7 @@
   <v-flex
     ><v-row>
       <v-container>
-        <h3 class="text-center mt-2">เปิด-ปิด ค่ายเกม</h3>
+        <h2 class="text-center mt-2 mb-4">เปิด-ปิด ค่ายเกม</h2>
       </v-container>
     </v-row>
     <template>

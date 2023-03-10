@@ -1,8 +1,8 @@
 <template>
   <div class="container">
     <loading-page v-if="loading"></loading-page>
-    <h3 class="text-center">เช็คข้อมูลเว็ปไซต์</h3>
-    <div class="row pa-4 mt-5">
+    <h2 class="text-center mt-2 mb-4">เช็คข้อมูลเว็ปไซต์</h2>
+    <div class="row  my-5">
       <div class="col-12 pa-2 col-sm-6">
         <v-autocomplete
           auto-select-first
@@ -41,7 +41,7 @@
       </div>
     </v-card>
     <v-alert dense text type="success" v-else
-      >เลือกวันที่ที่ต้องการด้านบนแล้วกดค้นหาเพื่อเช็คข้อมูลเว็ปไซต์</v-alert
+      >เลือกเว็ปที่ต้องการด้านบนแล้วกดค้นหาเพื่อเช็คข้อมูลเว็ปไซต์</v-alert
     >
   </div>
 </template>
