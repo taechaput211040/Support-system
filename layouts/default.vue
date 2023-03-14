@@ -34,7 +34,7 @@
       :clipped="clipped"
       app
       fixed
-      width="270"
+      width="280"
     >
       <v-toolbar-title class="font-weight-bold text-center pa-3" align-center>
         <h1>SUPPORT</h1>
@@ -164,6 +164,18 @@ export default {
           title: "ข้อมูลเว็ปไซต์",
           icon: "mdi-history",
           to: "/webinfo",
+          status: true
+        },
+        {
+          title: "รายงาน/การตั้งค่าลิงก์รับทรัพย์",
+          icon: "mdi-history",
+          to: "/affiliate/report",
+          status: true
+        },
+        {
+          title: "ข้อมูลสมาชิกลิงก์รับทรัพย์",
+          icon: "mdi-history",
+          to: "/affiliate/userInfo",
           status: true
         },
         {

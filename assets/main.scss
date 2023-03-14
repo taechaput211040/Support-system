@@ -563,3 +563,48 @@ button:hover {
     padding: 10px;
   }
 }
+.copy-link {
+  .copy_icon {
+    height: 25px;
+  }
+  cursor: pointer;
+}
+.card_affiliate {
+  border-radius: 10px;
+  box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%) !important;
+
+  .text_card {
+    font-weight: bold;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    background: linear-gradient(
+      to bottom right,
+      #111111 0%,
+      #343a40 100%
+    ) !important;
+    padding: 15px;
+    color: white;
+  }
+  .text_card_child {
+    font-weight: bold;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    background: linear-gradient(
+      to bottom right,
+      rgba(126, 186, 133, 0.81) 0%,
+      #0e5c20 100%
+    ) !important;
+    padding: 15px;
+    color: white;
+  }
+  .body_card {
+    .card-child {
+      border-radius: 10px;
+      background: white;
+      .text-end {
+        font-weight: bold;
+        font-size: large;
+      }
+    }
+  }
+}
