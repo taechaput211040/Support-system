@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <loading-page v-if="isLoading"></loading-page>
     <div>
       <div>
         <h2 class="text-center mt-2 mb-4">ข้อมูลสมาชิกลิงก์รับทรัพย์</h2>
@@ -504,7 +505,9 @@
 </template>
 
 <script>
+import LoadingPage from "../../components/LoadingPage.vue";
 export default {
+  components: { LoadingPage },
   watch: {
     startdate(newValue, Oldvalue) {
       if (newValue) {

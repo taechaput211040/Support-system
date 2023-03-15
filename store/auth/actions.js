@@ -113,11 +113,8 @@ export function getTransaction(context) {
 export function getAllWebsite(context) {
   // console.log(context.state)
   // return
-  if (localStorage.getItem("website")) {
-    let a = JSON.parse(localStorage.getItem("website"));
-    context.commit("set_website", localStorage.getItem("website"));
-
-    return a;
+  if (context.state.website) {
+    return context.state.website;
   }
   return new Promise(async (resolve, reject) => {
     try {

@@ -2,7 +2,7 @@
   <div class="container">
     <loading-page v-if="loading"></loading-page>
     <div>
-      <h2 class="text-center mt-2 mb-4">รายงาน affiliate</h2>
+      <h2 class="text-center mt-2 mb-4">รายงาน/การตั้งค่าลิงก์รับทรัพย์</h2>
       <div class="row my-5">
         <div class="col-12 pa-2 col-sm-6">
           <v-autocomplete

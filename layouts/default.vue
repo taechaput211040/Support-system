@@ -51,7 +51,7 @@
             <v-list-item-icon>
               <v-icon>{{ link.icon }}</v-icon>
             </v-list-item-icon>
-            <v-list-item-title v-text="link.title" />
+            <v-list-item-title :inner-text.prop="link.title" />
           </v-list-item>
           <v-list-group
             color="deep-purple lighten-2 "
@@ -74,7 +74,7 @@
               <v-list-item-icon>
                 <v-icon>{{ sublink.icon }}</v-icon>
               </v-list-item-icon>
-              <v-list-item-title v-text="sublink.text" />
+              <v-list-item-title :inner-text.prop="sublink.text" />
             </v-list-item>
           </v-list-group>
         </div>

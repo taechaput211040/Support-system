@@ -1,6 +1,7 @@
 <template>
   <v-flex>
     <v-container>
+      <loading-page v-if="loading"></loading-page>
       <h2 class="text-center mt-2 mb-4">เช็คข้อมูลสมาชิก</h2>
 
       <v-row class="select-item p-0">
@@ -172,9 +173,12 @@
 </template>
 <script>
 import { mapActions, mapState } from "vuex";
+import LoadingPage from '../components/LoadingPage.vue';
 export default {
+  components: { LoadingPage },
   data() {
     return {
+      loading: false,
       dlInfo: false,
       itemInfo: null,
       username: null,
@@ -391,7 +395,8 @@ export default {
     }),
     async search() {
       if (this.username) {
-        try {
+        this.loading = true;
+        try { 
           let m = await this.getMemberInfo({
             username: this.username
             // website: this.website
@@ -408,6 +413,7 @@ export default {
           });
           console.log(error);
         }
+        this.loading = false;
       } else {
         this.$swal({
           icon: "warning",

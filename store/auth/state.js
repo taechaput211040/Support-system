@@ -2,7 +2,7 @@ export default function() {
   return {
     key: localStorage.getItem("key") || "",
     user: localStorage.getItem("username") || null,
-    website: JSON.parse(localStorage.getItem("website")) || null,
+    website: null,
     gameType: {
       SL: "SLOT",
       LC: "LIVE-CASINO",
@@ -13,7 +13,7 @@ export default function() {
       PK: "POKER",
       FH: "FISHING",
       CB: "CARD & BOARD",
-      MG: "MINI GAME",
+      MG: "MINI GAME"
     },
     provider: {
       PGL: "PG Soft(l)",
@@ -108,6 +108,6 @@ export default function() {
       WC: "WM Casino",
 
       GN: "Genesis"
-  },
+    }
   };
 }
