@@ -1,20 +1,10 @@
 <template>
   <div>
-    <v-btn
-      color="error"
-      class="ma-4"
-      small
-      @click="$router.push(`${$route.path}`)"
-      >back</v-btn
-    >
-
     <v-card class="elevation-3">
       <v-data-table
-        disable-pagination
         :sort-by.sync="sortBy"
         :sort-desc.sync="sortDesc"
         :headers="header"
-        hide-default-footer
         :items="dbresult"
       >
         <template #[`item.type`]="{ item }">
@@ -36,13 +26,13 @@
           >
         </template>
         <template #[`item.payout`]="{ item }"
-          ><span>{{ item.payout.toFixed(2) }}</span>
+          ><span>{{ item.payout }}</span>
         </template>
         <template #[`item.turnover`]="{ item }"
-          ><span>{{ item.turnover.toFixed(2) }}</span>
+          ><span>{{ item.turnover }}</span>
         </template>
         <template #[`item.bet`]="{ item }"
-          ><span>{{ item.bet.toFixed(2) }}</span>
+          ><span>{{ item.bet }}</span>
         </template>
         <template #[`item.winlose`]="{ item }"
           ><span
@@ -50,20 +40,14 @@
               { 'error--text': item.winlose < 0 },
               { 'success--text': item.winlose > 0 }
             ]"
-            >{{ item.winlose.toFixed(2) }}</span
+            >{{ item.winlose }}</span
           >
         </template>
         <template #[`item.status`]="{ item }">
-          <div
-            class="success--text font-weight-bold"
-            v-if="item.status == true"
-          >
+          <div class="success--text font-weight-bold" v-if="item.status">
             สำเร็จ
           </div>
-          <div class="warning--text font-weight-bold" v-if="item.status == 0">
-            ผลยังไม่จบ
-          </div>
-          <div class="error--text font-weight-bold" v-if="item.status == false">
+          <div class="warning--text font-weight-bold" v-else>
             ผลยังไม่จบ
           </div>
         </template>
@@ -177,10 +161,6 @@ export default {
     },
     getDate(date) {
       return dayjs(date).format(`YYYY-MM-DD เวลา HH:mm:ss`);
-    },
-
-    async showmore(item) {
-      this.$router.push(`${this.$route.path}?provider=${item.provider}`);
     }
   }
 };

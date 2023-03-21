@@ -137,92 +137,92 @@ export default {
         },
         {
           title: "เปิด-ปิด เว็ปไซต์",
-          icon: "mdi-history",
+          icon: "mdi-toggle-switch",
           to: "/webManagement",
           status: true
         },
         {
           title: "เปิด-ปิด feature",
-          icon: "mdi-history",
+          icon: "mdi-tune",
           to: "/systemfeature",
           status: true
         },
         {
           title: "เช็คข้อมูลปัจจุบัน/จำนวนเทิร์น",
-          icon: "mdi-history",
+          icon: "mdi-timetable",
           to: "/member/memberCheck",
           status: true
         },
         {
           title: "เช็คข้อมูลการเล่น",
-          icon: "mdi-view-dashboard",
+          icon: "mdi-ticket",
           to: "/member/memberReportTransaction",
           status: true
         },
 
         {
           title: "ข้อมูลเว็ปไซต์",
-          icon: "mdi-history",
+          icon: "mdi-feature-search",
           to: "/webinfo",
           status: true
         },
         {
           title: "รายงาน/การตั้งค่าลิงก์รับทรัพย์",
-          icon: "mdi-history",
+          icon: "mdi-chart-line",
           to: "/affiliate/report",
           status: true
         },
         {
           title: "ข้อมูลสมาชิกลิงก์รับทรัพย์",
-          icon: "mdi-history",
+          icon: "mdi-treasure-chest",
           to: "/affiliate/userInfo",
           status: true
         },
         {
           title: "ข้อมูลสมาชิก",
-          icon: "mdi-history",
+          icon: "mdi-account",
           to: "/checkMember",
           status: true
         },
         {
           title: "เช็คข้อมูลโปรโมชั่น",
-          icon: "mdi-history",
+          icon: "mdi-gift-open",
           to: "/generalPromotion",
           status: true
         },
         {
           title: "จัดการ Landing Page",
-          icon: "mdi-history",
+          icon: "mdi-monitor-shimmer",
           to: "/landingpage",
           status: true
         },
         {
           title: "จัดการ Member Page",
-          icon: "mdi-history",
+          icon: "mdi-monitor-dashboard",
           to: "/memberpage",
           status: true
         },
         {
           title: "เปิด-ปิด ค่ายเกม",
-          icon: "mdi-history",
+          icon: "mdi-controller-classic",
           to: "/gamefeature",
           status: true
         },
         {
           title: "เชคเครดิตเอเย่น",
-          icon: "mdi-history",
+          icon: "mdi-credit-card-clock",
           to: "/checkCreditAgent",
           status: true
         },
         {
           title: "ลงทะเบียน SCB API",
-          icon: "mdi-history",
+          icon: "mdi-bank",
           to: "/ScbManagement",
           status: true
         },
         {
           title: "สร้างข้อมูล Macrodroid",
-          icon: "mdi-history",
+          icon: "mdi-android",
           to: "/MacrodroidInfo",
           status: true
         }

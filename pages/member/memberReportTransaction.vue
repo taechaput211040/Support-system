@@ -31,25 +31,6 @@
         </v-col>
       </v-row>
       <v-row class=" d-flex align-baseline ma-auto">
-        <v-col
-          cols="12"
-          sm="3"
-          class="d-flex  align-baseline"
-          v-if="searchSuccess"
-        >
-          <div class="py-0">
-            <v-select
-              label="เลือกจากยอดฝากล่าสุด 5 รายการ"
-              dense
-              hide-details="auto"
-              outlined
-              name="deposit5List"
-              placeholder="เลือกยอดฝาก"
-              :items="deposit_list_option"
-              v-model="selectDeposit"
-            ></v-select>
-          </div>
-        </v-col>
         <v-col cols="12" sm="3" class="d-flex  align-baseline py-0">
           <div>
             <v-btn color="primary" @click="searchdata()">
@@ -75,11 +56,11 @@
     </v-card>
 
     <v-card class="elevation-4 mt-5 rounded-lg">
-      <report-transection
+      <!-- <report-transection
         :dbresult="itemResult"
         v-if="!this.$route.query.group"
-      ></report-transection>
-      <detail-transection :dbresult="itemResult" v-else></detail-transection>
+      ></report-transection> -->
+      <detail-transection :dbresult="itemResult"></detail-transection>
     </v-card>
   </div>
 </template>
@@ -139,20 +120,17 @@ export default {
   async beforeMount() {
     this.renderData();
   },
-  watch: {
-    "$route.query.group"() {
-      this.renderData();
-    }
-  },
+  // watch: {
+  //   "$route.query.group"() {
+  //     this.renderData();
+  //   }
+  // },
   methods: {
     ...mapActions("member", ["getTransactionMember", "get5DepositRecord"]),
     async exportExcel() {
       let params;
-      if (this.selectDeposit) {
-        params = this.getParameterWithDp(this.selectDeposit);
-      } else {
-        params = this.getParameter();
-      }
+
+      params = this.getParameter();
       const res_export = await this.getDataExport();
 
       if (res_export) {
@@ -171,7 +149,6 @@ export default {
     },
     searchdata() {
       if (this.username) {
-        this.$router.replace(`${this.$route.path}`);
         this.renderData();
       } else {
         this.$swal({
@@ -186,7 +163,6 @@ export default {
       let dateFill = this.getDateFilter();
       let parameter = {
         username: this.username,
-        provider: undefined ? undefined : this.$route.query.group,
         roundid: undefined,
         starttime: dayjs(dateFill.start).toISOString(),
         endtime: dayjs(dateFill.end).toISOString()
@@ -269,19 +245,8 @@ export default {
 
           let response = await this.getTransactionMember(params);
 
-          if (!this.selectDeposit) {
-            const lastest_5_deposit = await this.get5DepositRecord(
-              this.username
-            );
-            if (lastest_5_deposit.data.length > 0) {
-              await this.mapDepositList(lastest_5_deposit.data);
-            }
-          }
           this.itemResult = response.data.filter(x => x.bet != 0);
           this.searchSuccess = true;
-          // console.log(this.itemResult, "res");
-          // this.itemResult = response.data.stats;
-          // this.dp = response.data.dp;
         } catch (error) {
           console.log(error);
         }
@@ -293,34 +258,17 @@ export default {
       if (this.username) {
         try {
           let params;
-          if (this.selectDeposit) {
-            params = this.getParameterWithDp(this.selectDeposit);
-          } else {
-            params = this.getParameter();
-          }
+
+          params = this.getParameter();
 
           let response = await this.getTransactionMember(params);
           return response.data;
-
-          // console.log(this.itemResult, "res");
-          // this.itemResult = response.data.stats;
-          // this.dp = response.data.dp;
         } catch (error) {
           console.log(error);
           return null;
         }
       }
       this.isloading = false;
-    },
-    async mapDepositList(deposit_lists) {
-      deposit_lists.map(x => {
-        this.deposit_list_option.push({
-          text: `ฝาก:${x.amount} โบนัส:${x.bonusamount} ${dayjs(
-            x.created_at
-          ).format("วันที่ DD เวลา HH:mm")}`,
-          value: x.created_at
-        });
-      });
     }
   }
 };

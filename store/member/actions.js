@@ -195,10 +195,9 @@ export function getTransactionMember(context, params) {
   return new Promise(async (resolve, reject) => {
     try {
       let response = await this.$axios.get(
-        `${process.env.REAL_TIME_REPORT_URL_SEAMLESS}/memberProvider`,
-        { params }
+        `https://all-seamless-trasaction-service-qlws7pv5wa-as.a.run.app/api/Summary/Round/pgl/${params.username}/${params.starttime}/${params.endtime}`
       );
-      console.log(response.data);
+
       resolve(response);
     } catch (error) {
       reject(error);
