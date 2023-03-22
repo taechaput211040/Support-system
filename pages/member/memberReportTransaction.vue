@@ -60,7 +60,11 @@
         :dbresult="itemResult"
         v-if="!this.$route.query.group"
       ></report-transection> -->
-      <detail-transection :dbresult="itemResult"></detail-transection>
+
+      <detail-transection
+        :dbresult="itemResult"
+        @options="handleEmite"
+      ></detail-transection>
     </v-card>
   </div>
 </template>
@@ -84,6 +88,7 @@ export default {
   },
   data() {
     return {
+      options: {},
       selectDeposit: null,
       deposit_list_option: [{ text: "ไม่เลือกยอดฝาก", value: null }],
       searchSuccess: false,
@@ -120,11 +125,13 @@ export default {
   async beforeMount() {
     this.renderData();
   },
-  // watch: {
-  //   "$route.query.group"() {
-  //     this.renderData();
-  //   }
-  // },
+  watch: {
+    options() {
+      if (this.username) {
+        this.searchdata();
+      }
+    }
+  },
   methods: {
     ...mapActions("member", ["getTransactionMember", "get5DepositRecord"]),
     async exportExcel() {
@@ -165,24 +172,13 @@ export default {
         username: this.username,
         roundid: undefined,
         starttime: dayjs(dateFill.start).toISOString(),
-        endtime: dayjs(dateFill.end).toISOString()
+        endtime: dayjs(dateFill.end).toISOString(),
+        page: this.options.page,
+        limit: this.options.itemsPerPage
       };
       return parameter;
     },
-    getParameterWithDp(dp) {
-      let dateFill = {
-        end: dayjs().toISOString(),
-        start: dayjs(dp).toISOString()
-      };
-      let parameter = {
-        username: this.username,
-        provider: undefined ? undefined : this.$route.query.group,
-        roundid: undefined,
-        starttime: dateFill.start,
-        endtime: dateFill.end
-      };
-      return parameter;
-    },
+
     //getdate
     getDateTime(date, time) {
       let dateFormat = "YYYY-MM-DD";
@@ -237,15 +233,10 @@ export default {
       if (this.username) {
         try {
           let params;
-          if (this.selectDeposit) {
-            params = this.getParameterWithDp(this.selectDeposit);
-          } else {
-            params = this.getParameter();
-          }
+          params = this.getParameter();
+          let { data: response } = await this.getTransactionMember(params);
 
-          let response = await this.getTransactionMember(params);
-
-          this.itemResult = response.data.filter(x => x.bet != 0);
+          this.itemResult = response;
           this.searchSuccess = true;
         } catch (error) {
           console.log(error);
@@ -269,6 +260,9 @@ export default {
         }
       }
       this.isloading = false;
+    },
+    handleEmite(value) {
+      this.options = value;
     }
   }
 };

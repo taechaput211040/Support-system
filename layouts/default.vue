@@ -167,6 +167,12 @@ export default {
           status: true
         },
         {
+          title: "ข้อมูล Cashback",
+          icon: "mdi-feature-search",
+          to: "/checkCashback",
+          status: true
+        },
+        {
           title: "รายงาน/การตั้งค่าลิงก์รับทรัพย์",
           icon: "mdi-chart-line",
           to: "/affiliate/report",

@@ -5,7 +5,14 @@
         :sort-by.sync="sortBy"
         :sort-desc.sync="sortDesc"
         :headers="header"
-        :items="dbresult"
+        :items="dbresult.data"
+        :server-items-length="dbresult.total"
+        :options.sync="optionsRender"
+        :footer-props="{
+          showFirstLastPage: true,
+          'items-per-page-text': '',
+          'items-per-page-options': [20, 50,100]
+        }"
       >
         <template #[`item.type`]="{ item }">
           <div>
@@ -76,6 +83,7 @@ export default {
   },
   data() {
     return {
+      optionsRender: {},
       sortBy: "start_time",
       sortDesc: true,
       result: [],
@@ -85,65 +93,81 @@ export default {
           value: "type",
           align: "center",
           sortable: false,
-          class: "font-weight-bold"
+          cellClass: "font-weight-bold"
         },
 
         {
           text: "username",
           value: "username",
           align: "center",
-          sortable: false
+          sortable: false,
+          cellClass: "font-weight-bold"
         },
         {
           text: "เวลา",
           value: "start_time",
           align: "center",
-          sortable: true
+          sortable: true,
+          cellClass: "font-weight-bold"
         },
         {
           text: "รายละเอียด",
           value: "detail_links",
           align: "center",
-          sortable: false
+          sortable: false,
+          cellClass: "font-weight-bold"
         },
         {
           text: "เดิมพัน",
           value: "bet",
           align: "center",
-          sortable: true
+          sortable: true,
+          cellClass: "font-weight-bold"
         },
         {
           text: "จ่าย",
           value: "payout",
           align: "center",
-          sortable: true
+          sortable: true,
+          cellClass: "font-weight-bold"
         },
         {
           text: "แพ้ชนะ",
           value: "winlose",
           align: "center",
-          sortable: true
+          sortable: true,
+          cellClass: "font-weight-bold"
         },
         {
           text: "สถานะการคิดผล",
           value: "status",
           align: "center",
-          sortable: false
+          sortable: false,
+          cellClass: "font-weight-bold"
         },
         {
           text: "ก่อนเดิมพัน",
           value: "bf_balance",
           align: "center",
-          sortable: false
+          sortable: false,
+          cellClass: "font-weight-bold"
         },
         {
           text: "หลังเดิมพัน",
           value: "after_balance",
           align: "center",
-          sortable: false
+          sortable: false,
+          cellClass: "font-weight-bold"
         }
       ]
     };
+  },
+  watch: {
+    optionsRender: {
+      handler() {
+        this.$emit("options", this.optionsRender);
+      }
+    }
   },
   async fetch() {
     this.result;

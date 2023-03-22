@@ -32,10 +32,10 @@
             :datasetting="systemSetting"
           ></system-show>
         </div>
-        <div class="col-12 col-sm-6">
+        <div class="col-12 ">
           <employee-list :employee="employeelist"></employee-list>
         </div>
-        <div class="col-12 col-sm-6">
+        <div class="col-12 ">
           <bank-list :dataBank="bankCompany"></bank-list>
         </div>
       </div>
@@ -89,7 +89,7 @@ export default {
         select.hash
       );
       await this.getMessage(select.hash);
-      await this.getEmployee(select.agent_username);
+      await this.getEmployee(select);
       await this.getBankCompany(select.hash);
       this.loading = false;
     },
@@ -103,9 +103,9 @@ export default {
         console.log(error);
       }
     },
-    async getEmployee(agent) {
+    async getEmployee(payload) {
       try {
-        let { data } = await this.$store.dispatch("setting/getEmployee", agent);
+        let { data } = await this.$store.dispatch("setting/getEmployee", payload);
         this.employeelist = data;
       } catch (error) {
         console.log(error);
@@ -114,7 +114,12 @@ export default {
     async getBankCompany(hash) {
       try {
         let data = await this.$store.dispatch("setting/getCompanybank", hash);
-        this.bankCompany = data;
+        this.bankCompany = data.map(x => {
+          return {
+            loading: false,
+            ...x
+          };
+        });
       } catch (error) {
         console.log(error);
       }

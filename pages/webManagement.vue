@@ -14,13 +14,13 @@
               dense
               solo
               outlined
-              @keyup.enter="getData()"
+              @keyup.enter="searchData"
               single-line
               hide-details
             ></v-text-field>
           </div>
           <div class="col-12 pa-2 col-sm-6">
-            <v-btn color="green lighten-1" dark depressed @click="getData()">
+            <v-btn color="green lighten-1" dark depressed @click="searchData">
               ค้นหา
             </v-btn>
           </div>
@@ -141,6 +141,10 @@ export default {
     }
   },
   methods: {
+    async searchData() {
+      this.options.page = 1;
+      await this.getData();
+    },
     getParameter() {
       let parameter = {
         limit: this.options.itemsPerPage,

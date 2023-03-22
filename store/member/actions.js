@@ -195,7 +195,7 @@ export function getTransactionMember(context, params) {
   return new Promise(async (resolve, reject) => {
     try {
       let response = await this.$axios.get(
-        `https://all-seamless-trasaction-service-qlws7pv5wa-as.a.run.app/api/Summary/Round/pgl/${params.username}/${params.starttime}/${params.endtime}`
+        `https://all-seamless-trasaction-service-qlws7pv5wa-as.a.run.app/api/Transaction/All/${params.username}/${params.starttime}/${params.endtime}?page=${params.page}&limit=${params.limit}&sort=DESC`
       );
 
       resolve(response);

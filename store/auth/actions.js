@@ -122,7 +122,6 @@ export function getAllWebsite(context) {
         `${process.env.ALL_SETTING}/api/Setting/AllActive`
       );
       context.commit("set_website", response.data);
-      localStorage.setItem("website", JSON.stringify(response.data));
       resolve(response.data);
     } catch (error) {
       reject(error);

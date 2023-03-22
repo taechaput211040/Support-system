@@ -83,11 +83,13 @@ export function getWebMessage(context, hash) {
     }
   });
 }
-export function getEmployee({}, agent) {
+export function getEmployee({}, payload) {
   return new Promise(async (resolve, reject) => {
     try {
       let response = await this.$axios.get(
-        `${process.env.ALL_RICO_USER}/api/User/${agent.toLowerCase()}`,
+        `${
+          process.env.ALL_RICO_USER
+        }/api/User/Support/${payload.company.toLowerCase()}/${payload.agent_username.toLowerCase()}`,
         {
           headers: {
             authorization:
@@ -150,6 +152,42 @@ export async function getPromotion({}, payload) {
         `${
           process.env.ALL_PROMOTION
         }/api/Promotion/Auto/Main/${payload.company.toLowerCase()}/${payload.agent.toLowerCase()}`
+      );
+      resolve(data);
+    } catch (error) {
+      reject(error);
+    }
+  });
+}
+export async function CheckCreditBank({}, bankAcc) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let { data } = await this.$axios.get(
+        `${process.env.ALL_SUPPORT}/api/Website/ScbBalance/${bankAcc}`
+      );
+      resolve(data);
+    } catch (error) {
+      reject(error);
+    }
+  });
+}
+export async function ReportTransactionScbApi({}, payload) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let { data } = await this.$axios.get(
+        `https://all-scb-api-qlws7pv5wa-as.a.run.app/api/Email/Transaction/${payload.acc_num}?page=${payload.page}`
+      );
+      resolve(data);
+    } catch (error) {
+      reject(error);
+    }
+  });
+}
+export function getCashback(context, payout) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let { data } = await this.$axios.get(
+        `${process.env.ALL_CASHBACK}/api/Cashback/GetCashBackSettingAuto/${payout.company.toLowerCase()}/${payout.agent_username.toLowerCase()}`
       );
       resolve(data);
     } catch (error) {

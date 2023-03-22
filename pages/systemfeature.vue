@@ -14,6 +14,7 @@
               :items="items"
               label="กรอก เว็บไซต์"
               outlined
+              @keyup.enter="search"
               dense
               v-model="selectweb"
             ></v-autocomplete>

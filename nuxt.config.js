@@ -3,7 +3,6 @@ import colors from "vuetify/es5/util/colors";
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-   
     title: "SUPPORT",
     htmlAttrs: {
       lang: "en"
@@ -34,7 +33,7 @@ export default {
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ["@nuxtjs/axios"],
+  modules: ["@nuxtjs/axios", "vue-sweetalert2/nuxt"],
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     customVariables: ["~/assets/variables.scss"]
@@ -56,6 +55,7 @@ export default {
     ALL_RICO_REPORT: process.env.ALL_RICO_REPORT,
     REAL_TIME_REPORT_URL_SEAMLESS: process.env.REAL_TIME_REPORT_URL_SEAMLESS,
     AFF_SETTING: process.env.AFF_SETTING,
-    AFF_MEMBER: process.env.AFF_MEMBER
+    AFF_MEMBER: process.env.AFF_MEMBER,
+    ALL_CASHBACK: process.env.ALL_CASHBACK,
   }
 };
