@@ -168,7 +168,7 @@ export default {
         },
         {
           title: "ข้อมูล Cashback",
-          icon: "mdi-feature-search",
+          icon: "mdi-cash-refund",
           to: "/checkCashback",
           status: true
         },
@@ -188,6 +188,12 @@ export default {
           title: "ข้อมูลสมาชิก",
           icon: "mdi-account",
           to: "/checkMember",
+          status: true
+        },
+        {
+          title: "เช็คข้อมูลรายการผิดพลาด",
+          icon: "mdi-account",
+          to: "/ManualEditCredit",
           status: true
         },
         {

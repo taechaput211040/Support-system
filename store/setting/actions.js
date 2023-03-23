@@ -183,11 +183,46 @@ export async function ReportTransactionScbApi({}, payload) {
     }
   });
 }
-export function getCashback(context, payout) {
+export async function getCashback(context, payout) {
   return new Promise(async (resolve, reject) => {
     try {
       let { data } = await this.$axios.get(
-        `${process.env.ALL_CASHBACK}/api/Cashback/GetCashBackSettingAuto/${payout.company.toLowerCase()}/${payout.agent_username.toLowerCase()}`
+        `${
+          process.env.ALL_CASHBACK
+        }/api/Cashback/GetCashBackSettingAuto/${payout.company.toLowerCase()}/${payout.agent_username.toLowerCase()}`
+      );
+      resolve(data);
+    } catch (error) {
+      reject(error);
+    }
+  });
+}
+export async function checkCashback(context, payload) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let response = await this.$axios.get(
+        `${process.env.ALL_CASHBACK}/api/cashback/Cashbackcheck/${payload}`
+      );
+
+      resolve(response.data);
+    } catch (error) {
+      reject(error);
+    }
+  });
+}
+
+export async function getManualEditCredit(context, fillter = {}) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let { data } = await this.$axios.get(
+        `${process.env.ALL_EDITCREDIT}/api/Edit/${
+          fillter.company
+        }/${fillter.agent.toLowerCase()}`,
+        {
+          params: {
+            ...fillter
+          }
+        }
       );
       resolve(data);
     } catch (error) {

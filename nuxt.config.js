@@ -57,5 +57,6 @@ export default {
     AFF_SETTING: process.env.AFF_SETTING,
     AFF_MEMBER: process.env.AFF_MEMBER,
     ALL_CASHBACK: process.env.ALL_CASHBACK,
+    ALL_EDITCREDIT: process.env.ALL_EDITCREDIT
   }
 };

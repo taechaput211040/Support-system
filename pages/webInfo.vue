@@ -81,17 +81,19 @@ export default {
   },
   methods: {
     async getAllDataInfo() {
-      this.loading = true;
-      let select = this.itemweb.find(x => x.hash == this.selectWeb);
-      this.selectItem = select;
-      this.systemSetting = await this.$store.dispatch(
-        "setting/getSystemSetting",
-        select.hash
-      );
-      await this.getMessage(select.hash);
-      await this.getEmployee(select);
-      await this.getBankCompany(select.hash);
-      this.loading = false;
+      if (this.selectWeb) {
+        this.loading = true;
+        let select = this.itemweb.find(x => x.hash == this.selectWeb);
+        this.selectItem = select;
+        this.systemSetting = await this.$store.dispatch(
+          "setting/getSystemSetting",
+          select.hash
+        );
+        await this.getMessage(select.hash);
+        await this.getEmployee(select);
+        await this.getBankCompany(select.hash);
+        this.loading = false;
+      }
     },
     async getMessage(hash) {
       try {
@@ -105,7 +107,10 @@ export default {
     },
     async getEmployee(payload) {
       try {
-        let { data } = await this.$store.dispatch("setting/getEmployee", payload);
+        let { data } = await this.$store.dispatch(
+          "setting/getEmployee",
+          payload
+        );
         this.employeelist = data;
       } catch (error) {
         console.log(error);
