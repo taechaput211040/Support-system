@@ -230,3 +230,68 @@ export async function getManualEditCredit(context, fillter = {}) {
     }
   });
 }
+export async function getDetailAgent(context, param) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let { data } = await this.$axios.get(
+        `/v1alpha/permanent/user/prefix?comPrefix=${param.company.toLowerCase()}&agentPrefix=${param.agent_username.toLowerCase()}`,
+        {
+          headers: {
+            apikey: `SAUCVDWFYGZH3K4M5P7Q8RATBUCWEXFYH2J3K4N6P7Q9SATBVDWEXGZH2J`,
+            authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJsYWNramFjazg4OCIsImdyb3VwcyI6WyJSRUFEX1BST1ZJREVSIl0sIndvcmtzcGFjZSI6InNtYXJ0Iiwic3VwZXJ2aXNvciI6eyJ1c2VybmFtZSI6Im1hc3RlcnNlbmlvcjIiLCJyb2xlIjoiU0VOSU9SIiwid29ya3NwYWNlIjoic21hcnQiLCJsZXZlbCI6NCwiY29tUHJlZml4Ijoic20iLCJhZ2VudFByZWZpeCI6Im0yIn0sInJvbGUiOiJBR0VOVCIsImlzU3RhZmYiOmZhbHNlLCJpc0Nsb25lIjpmYWxzZSwiaWF0IjoxNjc5NTcwMDczLCJleHAiOjE2ODA1MjA0NzMsImlzcyI6IlVrQTUwNzBacUFUejUzWkw4ZGRQaFFIbE5FNDhQRUpCIn0.LG8ggya6qcWB1f3_vDNFuIOxx-QR5Dhv7416wTF1CO8`
+          }
+        }
+      );
+      resolve(data);
+    } catch (error) {
+      reject(error);
+    }
+  });
+}
+export async function getBalance(context, username) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let { data } = await this.$axios.get(
+        `/v1alpha/credit/balance/${username}`,
+        {
+          headers: {
+            authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJsYWNramFjazg4OCIsImdyb3VwcyI6WyJSRUFEX1BST1ZJREVSIl0sIndvcmtzcGFjZSI6InNtYXJ0Iiwic3VwZXJ2aXNvciI6eyJ1c2VybmFtZSI6Im1hc3RlcnNlbmlvcjIiLCJyb2xlIjoiU0VOSU9SIiwid29ya3NwYWNlIjoic21hcnQiLCJsZXZlbCI6NCwiY29tUHJlZml4Ijoic20iLCJhZ2VudFByZWZpeCI6Im0yIn0sInJvbGUiOiJBR0VOVCIsImlzU3RhZmYiOmZhbHNlLCJpc0Nsb25lIjpmYWxzZSwiaWF0IjoxNjc5NTcwMDczLCJleHAiOjE2ODA1MjA0NzMsImlzcyI6IlVrQTUwNzBacUFUejUzWkw4ZGRQaFFIbE5FNDhQRUpCIn0.LG8ggya6qcWB1f3_vDNFuIOxx-QR5Dhv7416wTF1CO8`
+          }
+        }
+      );
+      resolve(data);
+    } catch (error) {
+      reject(error);
+    }
+  });
+}
+export async function getHistoryCredit(
+  { commit },
+  params = {
+    username: undefined,
+    page: undefined,
+    limit: undefined,
+    type: undefined
+  }
+) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let response = await this.$axios.get(
+        `/v1alpha/credit/history/${params.username}`,
+        {
+          params: {
+            page: params.page,
+            limit: params.limit,
+            type: params.type
+          },
+          headers: {
+            authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJsYWNramFjazg4OCIsImdyb3VwcyI6WyJSRUFEX1BST1ZJREVSIl0sIndvcmtzcGFjZSI6InNtYXJ0Iiwic3VwZXJ2aXNvciI6eyJ1c2VybmFtZSI6Im1hc3RlcnNlbmlvcjIiLCJyb2xlIjoiU0VOSU9SIiwid29ya3NwYWNlIjoic21hcnQiLCJsZXZlbCI6NCwiY29tUHJlZml4Ijoic20iLCJhZ2VudFByZWZpeCI6Im0yIn0sInJvbGUiOiJBR0VOVCIsImlzU3RhZmYiOmZhbHNlLCJpc0Nsb25lIjpmYWxzZSwiaWF0IjoxNjc5NTcwMDczLCJleHAiOjE2ODA1MjA0NzMsImlzcyI6IlVrQTUwNzBacUFUejUzWkw4ZGRQaFFIbE5FNDhQRUpCIn0.LG8ggya6qcWB1f3_vDNFuIOxx-QR5Dhv7416wTF1CO8`
+          }
+        }
+      );
+      resolve(response);
+    } catch (error) {
+      reject(error);
+    }
+  });
+}

@@ -31,6 +31,16 @@ export default {
     "@nuxtjs/vuetify",
     "@nuxtjs/axios"
   ],
+  axios: {
+    baseURL: '/',
+    proxy: true
+  },
+  proxy: {
+    "/v1alpha": {
+      target: "https://kong-api-proxy-qlws7pv5wa-as.a.run.app",
+      changeOrigin: true
+    }
+  },
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: ["@nuxtjs/axios", "vue-sweetalert2/nuxt"],
