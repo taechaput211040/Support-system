@@ -137,7 +137,7 @@ export default {
           text: "Type Ref.",
           value: "ref.type",
           sortable: false,
-          cellClass: "font-weight-bold"
+          cellClass: "font-weight-bold "
         },
         {
           text: "username ปลายทาง",
