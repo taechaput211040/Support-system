@@ -20,8 +20,9 @@
                 <div class="pa-2">
                   <v-text-field
                     label="พาสเวิร์ด"
+                    type="password"
                     outlined
-                    v-model="formLogin.Password"
+                    v-model="formLogin.password"
                     dense
                     hide-details="auto"
                     rounded
@@ -46,23 +47,27 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   layout: "session",
   data() {
     return {
       formLogin: {
         username: "",
-        Password: ""
+        passsword: ""
       }
     };
   },
   methods: {
+    ...mapActions("auth", {
+      actionLogin: "login"
+    }),
     async login() {
       try {
-        // let res = await this.$store.dispatch("auth/login", this.formLogin);
-        // if (res.key) {
+        let res = await this.actionLogin(this.formLogin);
+        if (res.data.access_token) {
           this.$router.push("/");
-        // }
+        }
       } catch (error) {
         console.log(error);
       }

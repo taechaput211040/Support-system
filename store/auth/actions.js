@@ -1,20 +1,13 @@
 export function login(context, { username, password }) {
   return new Promise(async (resolve, reject) => {
     try {
-      let response = {
-        data: {
-          user: username,
-          key: 1234
+      let response = await this.$axios.post(
+        `${process.env.ALL_SUPPORT_V2}/auth/signin`,
+        {
+          username,
+          password
         }
-      };
-
-      // let response = await this.$axios.post(
-      //   `${process.env.ALL_SUPPORT}/api/Login/auth`,
-      //   {
-      //     username,
-      //     password
-      //   }
-      // );
+      );
       context.commit("set_login", response.data);
       resolve(response);
     } catch (error) {

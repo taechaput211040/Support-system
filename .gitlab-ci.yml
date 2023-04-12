@@ -1,12 +1,45 @@
-# You can override the included template(s) by including variable overrides
-# SAST customization: https://docs.gitlab.com/ee/user/application_security/sast/#customizing-the-sast-settings
-# Secret Detection customization: https://docs.gitlab.com/ee/user/application_security/secret_detection/#customizing-settings
-# Dependency Scanning customization: https://docs.gitlab.com/ee/user/application_security/dependency_scanning/#customizing-the-dependency-scanning-settings
-# Note that environment variables can be set in several places
-# See https://docs.gitlab.com/ee/ci/variables/#cicd-variable-precedence
-stages:
-- test
-sast:
-  stage: test
-include:
-- template: Security/SAST.gitlab-ci.yml
+image: docker:20
+
+variables:
+  DOCKER_DRIVER: overlay2
+  DOCKER_TLS_CERTDIR: ""
+  DOCKER_HOST: tcp://docker:2375
+
+services:
+  - docker:20-dind
+
+build:
+  stage: build
+  only:
+    - main
+  artifacts:
+    paths:
+      - Dockerfile
+  before_script:
+    # $CI_JOB_TOKEN is variable automatically added by Gitlab: see https://docs.gitlab.com/ee/ci/variables/predefined_variables.html#variables-reference
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY_IMAGE
+    - IMAGE_TAG=$CI_COMMIT_SHORT_SHA
+  script:
+    - docker pull $CI_REGISTRY_IMAGE || true # Allows us to use --cache-from
+    - docker build --rm --cache-from $CI_REGISTRY_IMAGE -t $CI_REGISTRY_IMAGE:$IMAGE_TAG .
+    - docker push $CI_REGISTRY_IMAGE:$IMAGE_TAG
+
+push-to-sharehost:
+  stage: deploy
+  variables:
+    DEPLOY_AUTH: "Authorization: cpanel $CPANEL_USER:$CPANEL_TOKEN"
+    DEPLOY_PATH: "%2Fpublic_html%2F$DEPLOY_DOMAIN"
+    DEPLOY_UPLOAD_URL: "$CPANEL_HOST/json-api/cpanel?cpanel_jsonapi_module=Fileman&cpanel_jsonapi_apiversion=2&cpanel_jsonapi_func=uploadfiles&dir=$DEPLOY_PATH&overwrite=1"
+    DEPLOY_EXACT_SOURCE_DEST: "sourcefiles=$DEPLOY_PATH/dist-ci.zip&destfiles=$DEPLOY_PATH"
+    DEPLOY_EXACT_FILE_URL: "$CPANEL_HOST/json-api/cpanel?cpanel_jsonapi_module=Fileman&cpanel_jsonapi_apiversion=2&cpanel_jsonapi_func=fileop&dir=$DEPLOY_PATH&op=extract&$DEPLOY_EXACT_SOURCE_DEST"
+  # when: manual
+  before_script:
+    # Login to Gitlab registry
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY_IMAGE
+    - IMAGE_TAG=$CI_COMMIT_SHORT_SHA
+  script:
+    # - docker pull $CI_REGISTRY_IMAGE:$IMAGE_TAG
+    - mkdir -p $PWD/output
+    - docker run --rm -v $PWD/output:/usr/output $CI_REGISTRY_IMAGE:$IMAGE_TAG cp ../output/dist.zip /usr/output/dist-ci.zip
+    - docker run --rm -v $PWD/output:/usr/output alpine/curl --location "$DEPLOY_UPLOAD_URL"  --header "$DEPLOY_AUTH" --form '=@"/usr/output/dist-ci.zip"'
+    - docker run --rm -v $PWD/output:/usr/output alpine/curl --location "$DEPLOY_EXACT_FILE_URL"  --header "$DEPLOY_AUTH"
