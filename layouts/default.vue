@@ -25,6 +25,22 @@
               <v-icon>mdi-logout</v-icon>
             </v-btn>
           </template>
+          <span>เปลี่ยนpassword</span>
+        </v-tooltip>
+        <v-tooltip left color="black">
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn
+              fab
+              dark
+              v-bind="attrs"
+              v-on="on"
+              small
+              color="black"
+              @click="changepass()"
+            >
+              <v-icon>mdi-lock</v-icon>
+            </v-btn>
+          </template>
           <span>ออกจากระบบ</span>
         </v-tooltip>
       </v-speed-dial>
@@ -254,6 +270,9 @@ export default {
   async beforeMount() {},
   computed: {},
   methods: {
+    changepass(){
+      this.$router.push("/changepassword");
+    },
     logout() {
       this.$router.push("/login");
     }

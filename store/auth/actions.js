@@ -291,3 +291,20 @@ export function getMember(context, payload) {
     }
   });
 }
+export function change_password(context, data) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let response = await this.$axios.put(
+        `${process.env.ALL_SUPPORT_V2}/auth/ChangePassword`,
+        {
+          old_password: data.old_password,
+          new_password: data.new_password,
+          retype_new_password: "string"
+        }
+      );
+      resolve(response);
+    } catch (error) {
+      reject(error);
+    }
+  });
+}
